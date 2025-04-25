@@ -1,0 +1,30 @@
+/* Custom Colors */
+:root {
+    /* Dark theme (when user open project, theme should be dark) */
+    --color-background: #1D1D1F;
+    --color-card-bg: #2C2C2E;
+    --color-text-main: #FFFFFF;
+    --color-text-secondary: #B3B3B3;
+    --color-border: #3A3A3C;
+
+    /* Font */
+    --font-primary: 'Poppins', sans-serif;
+
+     /* Font size */
+    --font-h1: 32px;
+    --font-h2: 24px; 
+    --font-body: 16px; /* for text like (paragraphs and buttons) */
+    --font-small: 14px; /** for text like (small text, labels, and captions) */
+}
+
+
+/* This code down is override the dark theme colors */
+body.light-mode {
+    /* Light Theme Colors */
+    --color-primary: #FF6B00; /* for buttons (best option for UX) */
+    --color-background: #FFFFFF;
+    --color-card-bg: #F5F5F7;
+    --color-text-main: #1D1D1F;
+    --color-text-secondary: #6E6E73;
+    --color-border: #E5E5EA;
+}
