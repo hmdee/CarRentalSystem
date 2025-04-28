@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* Variables */
+:root {
+  --color-btn: #111010;
+  --color-text-main: #FFFFFF;
+  --header-text-second: #111010;
+  --color-text-secondary: #B3B3B3;
+  --color-border: #3A3A3C;
+  --color-error:rgb(220, 53, 69)
+}
+body
+{
+    font-family: "Poppins", sans-serif;
+}
+/* Welcome to Drivee */
+.img-container img {
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
+}
+.img-container {
+  position: relative;
+}
+.img-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 5, 12, 0.7), rgba(4, 5, 5, 0.9));
+}
+h1
+{
+color: var(--color-text-main);
+font-weight: 800;
+font-size: 2rem;
+}
+.layer-content h2
+{
+color: var(--color-text-main);
+font-weight: 500;
+font-size: 1.5rem;
+}
+.layer-content p
+{
+color: var(--color-text-main);
+font-weight: 400;
+font-size: 1rem;
+}
+/* ******************************************Create an account *************************************** */
+#drivee
+{
+    color: var(--header-text-second);
+font-weight: 700;
+font-size: 2.375rem;
+}
+.create-account h2
+{
+    color: var(--header-text-second);
+font-weight: 500;
+font-size: 1.5rem;
+}
+
+
+.form-box {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+
+.subtitle {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+}
+
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.social-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.social-btn img {
+  width: 20px;
+  margin-right: 8px;
+}
+
+.facebook {
+  background-color: #f0f2f5;
+}
+
+.google {
+  background-color: #f0f2f5;
+}
+
+.social-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input-group label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100% !important;
+  border: 1px solid #ccc;
+  border-radius: 8px !important;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+
+.checkbox-group input {
+  margin-right: 8px;
+}
+
+.submit-btn {
+  margin-top: 10px;
+  padding: 12px;
+  background-color:var(--color-btn);
+  color: var( --color-text-main);
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #333;
+}
+
+.login-link {
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+.login-link a {
+  color:var(--color-btn);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.error
+{
+  text-align: center;
+  color:var( --color-error);
+  font-size: 14px;
+}
+.signup-form p
+{
+  margin: 5px 0;
+}
+.form-control:focus
+{
+  box-shadow: 0 0 0 .25rem rgba(17, 16, 16, .25);
+  border-color: #111010 ;
+}
