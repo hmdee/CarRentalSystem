@@ -15,11 +15,12 @@ export default function inputsValidation(element, msgId,reqMsgID) {
   let regex = {
     name: /^[a-zA-Z\s]{2,30}$/,
     email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-    password: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+    password: /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/,
   };
   if(text.trim()=='')
   {
     reqMsg.classList.replace('d-none',"d-block");
+    msg.classList.replace('d-block',"d-none");
   }
   else
   {
