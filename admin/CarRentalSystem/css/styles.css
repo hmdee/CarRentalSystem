@@ -1,0 +1,138 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.sidebar {
+    min-height: 100vh;
+    border-right: 1px solid #dee2e6;
+    padding-top: 20px;
+    transition: all 0.3s;
+}
+
+.sidebar .nav-link {
+    color: #333;
+    padding: 10px 15px;
+}
+
+.sidebar .nav-link.active {
+    background-color: #333;
+    color: #fff;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #e9ecef;
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.table th {
+    font-weight: normal;
+    color: #6c757d;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.table td {
+    vertical-align: middle;
+    font-size: 0.9rem;
+    padding: 8px;
+}
+
+.table img {
+    max-width: 40px;
+    height: auto;
+}
+
+.form-select {
+    width: auto;
+    display: inline-block;
+}
+
+footer {
+    background-color: #343a40 !important;
+}
+
+footer a {
+    color: #fff;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer .bi {
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 767.98px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 250px;
+        height: 100%;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+    }
+
+    .table th, .table td {
+        font-size: 0.8rem;
+        padding: 5px;
+    }
+
+    .table-responsive {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        position: sticky;
+        top: 0;
+        left: 0;
+    }
+
+    .main-content {
+        margin-left: 250px;
+    }
+}
