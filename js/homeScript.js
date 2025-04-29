@@ -31,6 +31,9 @@ toggleBtn.addEventListener("click", () => {
 
 
 
+
+
+
 const rentCarBtn = document.getElementById("rentCarBtn");
 
 if (rentCarBtn) {

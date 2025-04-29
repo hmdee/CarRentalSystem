@@ -5,19 +5,12 @@
     --font-body: 16px;
     --font-small: 14px;
 }
-
 * {
     box-sizing: border-box;
 }
-
 html {
     scroll-behavior: smooth;
 }
-body {
-    color: #FFFFFF;
-    font-family: var(--font-primary);
-}
-
 body.dark-mode {
     --color-background: #1D1D1F;
     --color-card-bg: #2C2C2E;
@@ -28,7 +21,6 @@ body.dark-mode {
     --color-header-bg: #1D1D1F;
     --color-footer-bg: #2C2C2E;
 }
-
 body.light-mode {
     --color-background: #FFFFFF;
     --color-card-bg: #F5F5F7;
@@ -39,8 +31,24 @@ body.light-mode {
     --color-footer-bg: #F5F5F7;
     --color-background-about: #F5F5F7;
 }
-
+body {
+    font-family: var(--font-primary);
+    transition: 0.3s;
+}
+/* Custom Button */
+.custom-btn {
+    background-color: var(--color-text-main);
+    color: var(--color-header-bg);
+    border: 1px solid var(--color-header-bg);
+    transition: 0.3s;
+}
+.custom-btn:hover {
+    background-color: var(--color-header-bg);
+    color: var(--color-text-main);
+    border: 1px solid var(--color-text-main);
+}
 /* Toggle Theme */
+
 #themeToggle {
     position: fixed;
     top: 50%;
@@ -49,89 +57,56 @@ body.light-mode {
     background-color: var(--color-text-main);
     border-radius: 0 8px 8px 0;
     padding: 10px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    box-shadow: 0 0 5px var(--color-text-main);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: 0.3s;
     z-index: 999;
 }
 #themeToggle i {
     color: var(--color-header-bg);
 }
-
 /* End theme */
-body {
-    color: var(--color-text-main);
-    transition: 0.3s;
-}
-
 /* Header */
 .navbar {
     background-color: var(--color-header-bg) !important;
     color: var(--color-text-main) !important;
-    position: relative;
 }
-
 .navbar-brand {
     color: var(--color-text-main) !important;
     font-size: var(--font-h1);
-    font-weight: bold;
 }
-
 .navbar-nav a {
     color: var(--color-text-main) !important;
-}
-
-.nav-link {
     transition: 0.3s;
 }
-
-.nav-link:hover {
+.navbar-nav a:hover {
     transform: translateY(-1px);
     text-decoration: underline;
 }
-
 #authArea button {
-    border-radius: 5px;
     padding: 8px 16px;
     font-size: var(--font-small);
-    cursor: pointer;
-    font-weight: bold;
     transition: 0.3s;
 }
-
 #loginBtn {
     background-color: transparent;
     color: var(--color-text-main);
     border: 1px solid var(--color-text-main);
 }
-
 #loginBtn:hover {
     background-color: var(--color-text-main);
     color: var(--color-header-bg);
 }
-
-#signupBtn {
-    background-color: var(--color-text-main);
-    color: var(--color-header-bg);
-    border: 1px solid var(--color-header-bg);
-}
-
-#signupBtn:hover {
-    background-color: var(--color-header-bg);
-    color: var(--color-text-main);
-    border: 1px solid var(--color-text-main);
-}
-
 /* End header */
 
 /* Home Section */
 .landing-page {
     background-color: var(--color-background);
     color: var(--color-text-main);
+    padding: 60px 0 0 0;
 }
 .left-info h1 {
     font-size: 45px;
-    font-weight: bold;
 }
 .left-info p {
     font-size: var(--font-body);
@@ -139,22 +114,9 @@ body {
     line-height: 1.8;
 }
 .left-info button {
-    background-color: var(--color-text-main);
-    color: var(--color-header-bg);
-    border: 1px solid var(--color-header-bg);
     padding: 15px 30px;
     font-size: var(--font-body);
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
 }
-.left-info button:hover {
-    background-color: var(--color-header-bg);
-    color: var(--color-text-main);
-    border: 1px solid var(--color-text-main);
-}
-
 /* About Us Section */
 .about-section {
     background-color: var(--color-background-about);
@@ -162,7 +124,6 @@ body {
 }
 .about-section h2 {
     font-size: var(--font-h1);
-    font-weight: bold;
     margin-bottom: 20px;
     color: var(--color-text-main);
 }
@@ -173,17 +134,7 @@ body {
     line-height: 1.9;
 }
 .about-section .btn {
-    background-color: var(--color-text-main);
-    color: var(--color-background-about);
     padding: 15px 30px;
-    border-radius: 5px;
-    transition: 0.3s;
-    font-weight: bold;
-}
-.about-section .btn:hover {
-    background-color: var(--color-background-about);
-    color: var(--color-text-main);
-    border: 1.5px solid var(--color-text-main);
 }
 .about-section figure {
     display: flex;
@@ -195,7 +146,6 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-
 /* End About */
 
 /* Featured Vehicles */
@@ -217,19 +167,9 @@ body {
     object-fit: cover;
 }
 .card-body a.btn {
-    background-color: var(--color-text-main);
-    color: var(--color-background);
-    border: 1.5px solid var(--color-text-main);
     padding: 10px 20px;
-    border-radius: 5px;
     font-size: var(--font-body);
-    font-weight: bold;
-    transition: 0.3s;
-}
-.card-body a.btn:hover {
-    background-color: var(--color-background);
-    color: var(--color-text-main);
-    border: 1.5px solid var(--color-text-main);
+    margin-top: 10px;
 }
 .card-body h5 {
     color: var(--color-text-main);
@@ -241,7 +181,6 @@ body {
     font-size: var(--font-small);
     color: var(--color-text-secondary);
 }
-
 /* End of featured Vehicles */
 
 /* Offers */
@@ -268,26 +207,15 @@ body {
 }
 .offer-card .card-title {
     font-size: var(--font-h2);
-    font-weight: bold;
 }
 .offer-card .text-muted {
     font-size: var(--font-body);
     color: var(--color-text-secondary) !important;
 }
 .offer-card .btn-outline-light {
-    border-width: 1px;
     font-size: var(--font-primary);
-    background-color: var(--color-text-main) !important;
-    color: var(--color-header-bg) !important;
-    transition: 0.3s;
-}
-.offer-card .btn-outline-light:hover {
-    background-color: var(--color-header-bg) !important;
-    color: var(--color-text-main) !important;
-    border: 1px solid var(--color-text-main) !important;
 }
 /* End Offers */
-
 /* Start Slider */
 .slider {
     background-color: var(--color-border);
@@ -328,9 +256,7 @@ footer ul li a {
 footer ul li a:hover {
     text-decoration: underline;
 }
-footer ul.links li a {
-    color: var(--color-text-secondary);
-}
+footer ul.links li a,
 footer ul.cities li {
     color: var(--color-text-secondary) !important;
 }
@@ -345,6 +271,7 @@ footer ul.cities li {
 }
 /* End Footer */
 
+/* Tablet */
 @media (max-width: 991px) {
     #authArea {
         padding-bottom: 10px;
@@ -369,6 +296,7 @@ footer ul.cities li {
     }
 }
 
+/* Phones */
 @media (max-width: 768px) {
     .left-info h1 {
         font-size: 30px;
@@ -380,7 +308,7 @@ footer ul.cities li {
         margin-top: 12px;
     }
     .landing-page {
-        padding-bottom: 0 !important;
+        padding: 120px 0 0 0;
     }
     .about-section {
         padding: 50px 0;
