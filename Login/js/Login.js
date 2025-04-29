@@ -14,7 +14,7 @@ export default function logIn(userEmail, userPassword) {
     loginError.classList.add("d-none");
     console.log(`Welcome ${foundUser.name}`);
     localStorage.setItem("currentUser", JSON.stringify(foundUser));
-    // window.open('../../Home/Home.html', '_self');
+    window.open('../../index.html', '_self');
   } else {
     loginError.classList.remove("d-none");
   }
