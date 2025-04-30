@@ -33,6 +33,7 @@ main .car-item figure img {
 input[type='text'], input[type='number'] {
     background-color: var(--color-card-bg);
     border-color: var(--color-border) !important;
+    color: var(--color-text-main) !important;
     outline: none;
 }
 input[type='text']:focus,
