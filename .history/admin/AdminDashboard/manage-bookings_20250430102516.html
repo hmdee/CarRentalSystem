@@ -133,6 +133,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       const currentUrl = window.location.href;
       document.querySelectorAll('#menu .nav-link').forEach(link => {
+        // نفعل الـ active فقط إذا تطابقت الـ href بالكامل مع الـ URL الحالي
         link.classList.toggle('active', link.href === currentUrl);
       });
     });

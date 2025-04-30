@@ -4,6 +4,7 @@ const getBookings = () => {
     return JSON.parse(localStorage.getItem(STORAGE_KEY_BOOKINGS) || '[]');
 };
 
+// تحديث العناصر النصية والرسوم البيانية
 document.addEventListener('DOMContentLoaded', () => {
     const bookings = getBookings();
 

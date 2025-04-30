@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeIcon = document.getElementById('themeIcon');
     const htmlElement = document.documentElement;
 
+    // تحقق من الوضع المحفوظ في localStorage
     if (localStorage.getItem('theme') === 'dark') {
         htmlElement.classList.add('dark-mode');
         themeIcon.classList.replace('bi-brightness-high', 'bi-moon-fill');
