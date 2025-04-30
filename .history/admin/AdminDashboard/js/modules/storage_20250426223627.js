@@ -7,7 +7,7 @@
 
 /**
  * Retrieves all bookings from Local Storage.
- *  An array of bookings.
+ * @returns {Array} An array of bookings.
  */
 export function getBookings() {
     const bookingsData = localStorage.getItem("bookings");
@@ -25,7 +25,7 @@ export function getBookings() {
 
 /**
  * Validates a booking object.
- * - The booking object to validate.
+ * @param {Object} booking - The booking object to validate.
  */
 function validateBooking(booking) {
     const validStatuses = ["Pending", "Confirmed", "Cancelled"];
@@ -44,8 +44,8 @@ function validateBooking(booking) {
 
 /**
  * Updates the status of a booking.
- * - The ID of the booking to update.
- *  - The new status ("Pending", "Confirmed", "Cancelled").
+ * @param {string} bookingId - The ID of the booking to update.
+ * @param {string} newStatus - The new status ("Pending", "Confirmed", "Cancelled").
  */
 export function updateBookingStatus(bookingId, newStatus) {
     const validStatuses = ["Pending", "Confirmed", "Cancelled"];
@@ -67,7 +67,7 @@ export function updateBookingStatus(bookingId, newStatus) {
 
 /**
  * Retrieves all car listings from Local Storage.
- *  An array of cars.
+ * @returns {Array} An array of cars.
  */
 export function getCars() {
     const carsData = localStorage.getItem("cars");
@@ -85,7 +85,7 @@ export function getCars() {
 
 /**
  * Validates a car object.
- *  - The car object to validate.
+ * @param {Object} car - The car object to validate.
  */
 function validateCar(car) {
     const requiredFields = ["id", "model", "year", "passengers", "price_per_day", "available", "image", "transmission", "fuel_type", "mileage"];
@@ -135,8 +135,8 @@ function validateCar(car) {
 
 /**
  * Adds a new car listing to Local Storage.
- *   - The car object to add.
- *  The added car.
+ * @param {Object} car - The car object to add.
+ * @returns {Object} The added car.
  */
 export function addCar(car) {
     validateCar(car);
@@ -150,8 +150,8 @@ export function addCar(car) {
 
 /**
  * Updates an existing car listing.
- *  - The ID of the car to update.
- *  - The updated car object.
+ * @param {string} carId - The ID of the car to update.
+ * @param {Object} updatedCar - The updated car object.
  */
 export function updateCar(carId, updatedCar) {
     const cars = getCars();
@@ -167,7 +167,7 @@ export function updateCar(carId, updatedCar) {
 
 /**
  * Removes a car listing from Local Storage.
- *  - The ID of the car to remove.
+ * @param {string} carId - The ID of the car to remove.
  */
 export function removeCar(carId) {
     const cars = getCars();
@@ -184,7 +184,7 @@ export function removeCar(carId) {
 
 /**
  * Generates a report of bookings per month.
- *  An object with months as keys and booking counts as values.
+ * @returns {Object} An object with months as keys and booking counts as values.
  */
 export function getBookingsPerMonth() {
     const bookings = getBookings();
@@ -201,6 +201,7 @@ export function getBookingsPerMonth() {
 
 /**
  * Generates a report of peak hours for bookings.
+ * @returns {Object} An object with hours (0-23) as keys and booking counts as values.
  */
 export function getPeakHours() {
     const bookings = getBookings();
