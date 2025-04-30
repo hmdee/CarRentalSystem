@@ -13,7 +13,7 @@ async function setCarsToLocalStorage() {
                 console.log("Cars added to localStorage");
             }
         } catch (error) {
-            console.error("Error in setting cars to localStorage ", error);
+            console.log("Error in setting cars to localStorage ", error);
         }
     }
 }
