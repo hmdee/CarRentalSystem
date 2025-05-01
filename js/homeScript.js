@@ -47,11 +47,11 @@ const loginBtn = document.getElementById('loginBtn');
 const signupBtn = document.getElementById('signupBtn');
 
 loginBtn.addEventListener('click', function () {
-    window.open('../Login/Login.html');
+    window.location.href = '../Login/Login.html';
 });
 
 signupBtn.addEventListener('click', function () {
-    window.open('../Register/Register.html');
+    window.location.href = '../Register/Register.html';
 });
 
 
