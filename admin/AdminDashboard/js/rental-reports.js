@@ -4,6 +4,7 @@ const getBookings = () => {
     return JSON.parse(localStorage.getItem(STORAGE_KEY_BOOKINGS) || '[]');
 };
 
+// تحديث العناصر النصية والرسوم البيانية
 document.addEventListener('DOMContentLoaded', () => {
     const bookings = getBookings();
 
@@ -57,17 +58,17 @@ document.addEventListener('DOMContentLoaded', () => {
             scales: {
                 y: {
                     beginAtZero: true,
-                    ticks: { color: '#FFFFFF' },
+                    ticks: { color: '#FF6B00' },
                     grid: { color: '#3A3A3C' }
                 },
                 x: {
-                    ticks: { color: '#FFFFFF' },
+                    ticks: { color: '#FF6B00' },
                     grid: { color: '#3A3A3C' }
                 }
             },
             plugins: {
                 legend: {
-                    labels: { color: '#FFFFFF' }
+                    labels: { color: '#FF6B00' }
                 }
             }
         }
@@ -94,17 +95,17 @@ document.addEventListener('DOMContentLoaded', () => {
             scales: {
                 y: {
                     beginAtZero: true,
-                    ticks: { color: '#FFFFFF' },
+                    ticks: { color: '#FF6B00' },
                     grid: { color: '#3A3A3C' }
                 },
                 x: {
-                    ticks: { color: '#FFFFFF' },
+                    ticks: { color: '#FF6B00' },
                     grid: { color: '#3A3A3C' }
                 }
             },
             plugins: {
                 legend: {
-                    labels: { color: '#FFFFFF' }
+                    labels: { color: '#FF6B00' }
                 }
             }
         }

@@ -1,19 +1,9 @@
 import { getCars, addCar, updateCar, removeCar } from "../js/modules/storage.js";
 
-window.onload = () => {
-    // Load navbar and footer
-    fetch("../components/navbar.html")
-        .then(res => res.ok ? res.text() : Promise.reject("Failed to load navbar"))
-        .then(html => document.getElementById("navbar-placeholder").innerHTML = html)
-        .catch(err => document.getElementById("navbar-placeholder").innerHTML = "<p>Failed to load navbar.</p>");
-
-    fetch("../components/footer.html")
-        .then(res => res.ok ? res.text() : Promise.reject("Failed to load footer"))
-        .then(html => document.getElementById("footer-placeholder").innerHTML = html)
-        .catch(err => document.getElementById("footer-placeholder").innerHTML = "<p>Failed to load footer.</p>");
-
+document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
     const carsTableBody = document.getElementById("cars-table");
+    const carErrorDiv = document.getElementById('car-error');
     const carForm = document.getElementById("car-form");
     const carIdInput = document.getElementById("car-id");
     const carImageInput = document.getElementById("car-image");
@@ -22,6 +12,14 @@ window.onload = () => {
     const submitCarBtn = document.getElementById("submit-car-btn");
     const carModal = new bootstrap.Modal(document.getElementById("carModal"));
     const openCarModalBtn = document.getElementById("open-car-modal");
+
+    
+    const showError = (message) => {
+        carErrorDiv.innerHTML = `
+            ${message}
+        `;
+        carErrorDiv.classList.remove('d-none');
+    };
 
     // Show modal when clicking "Add New Car"
     openCarModalBtn.addEventListener("click", () => {
@@ -50,36 +48,82 @@ window.onload = () => {
 
     // Create table row for a car
     const tableRow = (car) => {
-        const tr = document.createElement("tr");
-        const formated={
-            car
+        let newTr = document.createElement("tr");
+
+        // تنسيق الخصائص الخاصة
+        let formattedCar = {
+            image: `<img src="${car.image}" alt="${car.model}" style="max-width: 60px;">`,
+            model: car.model,
+            year: car.year,
+            passengers: car.passengers,
+            price_per_day: `$${car.price_per_day}`,
+            available: car.available === 'true' ? 'Yes' : 'No',
+            transmission: car.transmission,
+            fuel_type: car.fuel_type,
+            mileage: car.mileage,
+            features: car.features ? car.features.join(', ') : 'N/A',
+            rating: car.rating || 'N/A'
+        };
+
+        // إنشاء الخلايا بناءً على الخصائص المُنسقة
+        for (let prop in formattedCar) {
+            let newTd = document.createElement("td");
+            newTd.innerHTML = formattedCar[prop];
+            if (['transmission', 'fuel_type', 'mileage', 'features', 'rating'].includes(prop)) {
+                newTd.classList.add('d-none', 'd-md-table-cell');
+            }
+            newTr.appendChild(newTd);
         }
-        tr.innerHTML = `
-            <td><img src="${car.image}" alt="${car.model}" style="width: 50px;"></td>
-            <td>${car.model}</td>
-            <td>${car.year}</td>
-            <td>${car.passengers}</td>
-            <td>$${car.price_per_day}</td>
-            <td>${car.available ? "Yes" : "No"}</td>
-            <td class="d-none d-md-table-cell">${car.transmission}</td>
-            <td class="d-none d-md-table-cell">${car.fuel_type}</td>
-            <td class="d-none d-md-table-cell">${car.mileage}</td>
-            <td class="d-none d-md-table-cell">${car.features?.join(", ") || "N/A"}</td>
-            <td class="d-none d-md-table-cell">${car.rating ?? "N/A"}</td>
-            <td>
-                <button class="btn btn-sm btn-warning edit-car" data-id="${car.id}">Edit</button>
-                <button class="btn btn-sm btn-danger delete-car" data-id="${car.id}">Delete</button>
-            </td>
+
+        // إضافة خلية الأزرار
+        let actionsTd = document.createElement("td");
+        actionsTd.innerHTML = `
+            <button class="btn btn-sm btn-warning edit-car me-1" data-id="${car.id}">Edit</button>
+            <button class="btn btn-sm btn-danger delete-car" data-id="${car.id}">Delete</button>
         `;
-        return tr;
+        newTr.appendChild(actionsTd);
+
+        return newTr;
     };
 
     // Render all cars in table
-    const renderCars = () => {
+    const renderCars = (carsToDisplay = getCars()) => {
+        if (carsToDisplay.error) {
+            showError(carsToDisplay.error);
+            return;
+        }
         carsTableBody.innerHTML = "";
-        getCars().forEach(car => carsTableBody.appendChild(tableRow(car)));
+        carsToDisplay.forEach(car => carsTableBody.appendChild(tableRow(car)));
         attachActionListeners();
     };
+
+    // Search and filter functionality
+    const filterCars = () => {
+        const searchTerm = document.getElementById('search-cars').value.toLowerCase();
+        const showAvailableOnly = document.getElementById('filter-available').checked;
+        let cars = getCars();
+        if (cars.error) {
+            showError(cars.error);
+            return;
+        }
+
+        if (searchTerm) {
+            cars = cars.filter(car =>
+                car.model.toLowerCase().includes(searchTerm) ||
+                car.year.toString().includes(searchTerm)
+            );
+        }
+
+        if (showAvailableOnly) {
+            cars = cars.filter(car => car.available === 'true');
+        }
+
+        renderCars(cars);
+    };
+
+    // Search and filter event listeners
+    document.getElementById('search-cars').addEventListener('input', filterCars);
+    document.getElementById('filter-available').addEventListener('change', filterCars);
 
     // Add/Edit Form Submit
     carForm.addEventListener("submit", (event) => {
@@ -88,32 +132,36 @@ window.onload = () => {
         const car = {
             id: carIdInput.value || Date.now().toString(),
             model: formData.get("model"),
-            year: parseInt(formData.get("year")),
-            passengers: parseInt(formData.get("passengers")),
-            price_per_day: parseFloat(formData.get("price_per_day")),
-            available: formData.get("available") === "true",
+            year: parseInt(formData.get("year")) || 0,
+            passengers: parseInt(formData.get("passengers")) || 0,
+            price_per_day: parseFloat(formData.get("price_per_day")) || 0,
+            available: formData.get("available"),
             transmission: formData.get("transmission"),
             fuel_type: formData.get("fuel_type"),
-            mileage: parseInt(formData.get("mileage")),
+            mileage: parseInt(formData.get("mileage")) || 0,
             features: formData.get("features") ? formData.get("features").split(",").map(f => f.trim()) : [],
             rating: formData.get("rating") ? parseFloat(formData.get("rating")) : undefined,
-            image: formData.get("image")
+            image: carImageBase64Input.value
         };
 
+        let result;
         if (carIdInput.value) {
-            updateCar(car.id, car);
-            alert("Car updated successfully!");
+            result = updateCar(car.id, car);
         } else {
-            addCar(car);
-            alert("Car added successfully!");
+            result = addCar(car);
         }
 
-        carForm.reset();
-        carIdInput.value = "";
-        carImageBase64Input.value = "";
-        imagePreview.style.display = "none";
-        carModal.hide();
-        renderCars(); // refresh the DOM only, not the page
+        if (result.error) {
+            showError(result.error);
+        } else {
+            carErrorDiv.classList.add('d-none');
+            carForm.reset();
+            carIdInput.value = "";
+            carImageBase64Input.value = "";
+            imagePreview.style.display = "none";
+            carModal.hide();
+            renderCars();
+        }
     });
 
     // Attach event listeners for Edit/Delete buttons
@@ -121,14 +169,14 @@ window.onload = () => {
         document.querySelectorAll(".edit-car").forEach(button => {
             button.addEventListener("click", () => {
                 const carId = button.dataset.id;
-                const car = getCars().find(c => c.id === carId);
+                const car = getCars().find(c => c.id.toString() === carId.toString());
                 if (car) {
                     carIdInput.value = car.id;
                     document.getElementById("car-model").value = car.model;
                     document.getElementById("car-year").value = car.year;
                     document.getElementById("car-passengers").value = car.passengers;
                     document.getElementById("car-price").value = car.price_per_day;
-                    document.getElementById("car-available").value = car.available ? "true" : "false";
+                    document.getElementById("car-available").value = car.available;
                     document.getElementById("car-transmission").value = car.transmission;
                     document.getElementById("car-fuel-type").value = car.fuel_type;
                     document.getElementById("car-mileage").value = car.mileage;
@@ -143,10 +191,13 @@ window.onload = () => {
             });
         });
 
-        document.querySelectorAll(".delete-car").forEach(button => {
-            button.addEventListener("click", () => {
-                if (confirm("Are you sure you want to delete this car?")) {
-                    removeCar(button.dataset.id);
+        document.querySelectorAll('.delete-car').forEach(button => {
+            button.addEventListener('click', () => {
+                const carId = parseInt(button.getAttribute('data-id'));
+                const result = removeCar(carId);
+                if (result.error) {
+                    showError(result.error);
+                } else {
                     renderCars();
                 }
             });
@@ -154,4 +205,4 @@ window.onload = () => {
     };
 
     renderCars();
-};
+});

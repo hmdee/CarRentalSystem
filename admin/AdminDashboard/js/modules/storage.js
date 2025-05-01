@@ -1,14 +1,13 @@
 /**
  * Manages data storage for the Admin Dashboard using Local Storage.
- * Handles bookings, car listings, and rental reports.
+ * Handles bookings, car listings, users, and rental reports.
  */
 
 // === Bookings Functions ===
 
 /**
  * Retrieves all bookings from Local Storage.
- *  An array of bookings.
- */
+*/
 export function getBookings() {
     const bookingsData = localStorage.getItem("bookings");
     if (!bookingsData) {
@@ -17,7 +16,7 @@ export function getBookings() {
 
     const bookings = JSON.parse(bookingsData);
     if (!Array.isArray(bookings)) {
-        throw new Error("Bookings data is not an array");
+        return { error: "Bookings data is not an array" };
     }
 
     return bookings;
@@ -25,49 +24,56 @@ export function getBookings() {
 
 /**
  * Validates a booking object.
- * - The booking object to validate.
+ * @param {Object} booking - The booking object to validate.
+ * @returns {string|null} Error message if validation fails, null otherwise.
  */
 function validateBooking(booking) {
-    const validStatuses = ["Pending", "Confirmed", "Cancelled"];
+    const validStatuses = ["pending", "confirmed", "cancelled"];
     
-    const requiredFields = ["id", "carId", "date", "returnDate", "status"];
+    const requiredFields = ["id", "carId", "date", "returnDate", "status", "userId"];
     for (const field of requiredFields) {
         if (!booking[field] || (typeof booking[field] === "string" && booking[field].trim() === "")) {
-            throw new Error(`${field} is required`);
+            return `${field} is required`;
         }
     }
 
     if (!validStatuses.includes(booking.status)) {
-        throw new Error(`Invalid status: ${booking.status}. Must be one of ${validStatuses.join(", ")}`);
+        return `Invalid status: ${booking.status}. Must be one of ${validStatuses.join(", ")}`;
     }
+
+    return null;
 }
 
 /**
  * Updates the status of a booking.
- * - The ID of the booking to update.
- *  - The new status ("Pending", "Confirmed", "Cancelled").
+ * @param {number} bookingId - The ID of the booking to update.
+ * @param {string} newStatus - The new status ("pending", "confirmed", "cancelled").
+ * @returns {Object} Result object with error message if any.
  */
 export function updateBookingStatus(bookingId, newStatus) {
-    const validStatuses = ["Pending", "Confirmed", "Cancelled"];
+    const validStatuses = ["pending", "confirmed", "cancelled"];
     if (!validStatuses.includes(newStatus)) {
-        throw new Error(`Invalid status: ${newStatus}. Must be one of ${validStatuses.join(", ")}`);
+        return { error: `Invalid status: ${newStatus}. Must be one of ${validStatuses.join(", ")}` };
     }
 
     const bookings = getBookings();
+    if (bookings.error) return bookings;
+
     const bookingIndex = bookings.findIndex(booking => booking.id === bookingId);
     if (bookingIndex === -1) {
-        throw new Error("Booking not found");
+        return { error: "Booking not found" };
     }
 
     bookings[bookingIndex].status = newStatus;
     localStorage.setItem("bookings", JSON.stringify(bookings));
+    return { success: true };
 }
 
 // === Car Listings Functions ===
 
 /**
  * Retrieves all car listings from Local Storage.
- *  An array of cars.
+ * @returns {Array|Object} An array of cars or an error object.
  */
 export function getCars() {
     const carsData = localStorage.getItem("cars");
@@ -77,7 +83,7 @@ export function getCars() {
 
     const cars = JSON.parse(carsData);
     if (!Array.isArray(cars)) {
-        throw new Error("Cars data is not an array");
+        return { error: "Cars data is not an array" };
     }
 
     return cars;
@@ -85,7 +91,8 @@ export function getCars() {
 
 /**
  * Validates a car object.
- *  - The car object to validate.
+ * @param {Object} car - The car object to validate.
+ * @returns {string|null} Error message if validation fails, null otherwise.
  */
 function validateCar(car) {
     const requiredFields = ["id", "model", "year", "passengers", "price_per_day", "available", "image", "transmission", "fuel_type", "mileage"];
@@ -94,102 +101,232 @@ function validateCar(car) {
     // Validate required fields
     for (const field of requiredFields) {
         if (car[field] === undefined || car[field] === null || (typeof car[field] === "string" && car[field].trim() === "")) {
-            throw new Error(`${field} is required`);
+            return `${field} is required`;
         }
     }
 
     // Validate types and ranges
     if (typeof car.year !== "number" || car.year < 1900 || car.year > new Date().getFullYear() + 1) {
-        throw new Error("Year must be a valid number between 1900 and next year");
+        return "Year must be a valid number between 1900 and next year";
     }
 
     if (typeof car.passengers !== "number" || car.passengers <= 0) {
-        throw new Error("Passengers must be a positive number");
+        return "Passengers must be a positive number";
     }
 
     if (typeof car.price_per_day !== "number" || car.price_per_day <= 0) {
-        throw new Error("Price per day must be a positive number");
+        return "Price per day must be a positive number";
     }
 
-    if (typeof car.available !== "boolean") {
-        throw new Error("Available must be a boolean");
+    if (typeof car.available !== "string" || !["true", "false"].includes(car.available)) {
+        return "Available must be 'true' or 'false'";
     }
 
     if (typeof car.mileage !== "number" || car.mileage < 0) {
-        throw new Error("Mileage must be a non-negative number");
+        return "Mileage must be a non-negative number";
     }
 
     // Validate image as a Base64 string
     if (!car.image.startsWith("data:image/")) {
-        throw new Error("Image must be a valid Base64 string starting with 'data:image/'");
+        return "Image must be a valid Base64 string starting with 'data:image/'";
     }
 
     if (car.features && !Array.isArray(car.features)) {
-        throw new Error("Features must be an array");
+        return "Features must be an array";
     }
 
     if (car.rating !== undefined && (typeof car.rating !== "number" || car.rating < 0 || car.rating > 5)) {
-        throw new Error("Rating must be a number between 0 and 5");
+        return "Rating must be a number between 0 and 5";
     }
+
+    return null;
 }
 
 /**
  * Adds a new car listing to Local Storage.
- *   - The car object to add.
- *  The added car.
+ * @param {Object} car - The car object to add.
+ * @returns {Object} Result object with the added car or an error message.
  */
 export function addCar(car) {
-    validateCar(car);
+    const validationError = validateCar(car);
+    if (validationError) {
+        return { error: validationError };
+    }
 
     const cars = getCars();
+    if (cars.error) return cars;
+
     cars.push(car);
     localStorage.setItem("cars", JSON.stringify(cars));
-
-    return car;
+    return { success: true, car };
 }
 
 /**
  * Updates an existing car listing.
- *  - The ID of the car to update.
- *  - The updated car object.
+ * @param {number} carId - The ID of the car to update.
+ * @param {Object} updatedCar - The updated car object.
+ * @returns {Object} Result object with success status or an error message.
  */
 export function updateCar(carId, updatedCar) {
     const cars = getCars();
+    if (cars.error) return cars;
+
     const carIndex = cars.findIndex(car => car.id.toString() === carId.toString());
     if (carIndex === -1) {
-        throw new Error("Car not found");
+        return { error: "Car not found" };
     }
 
-    validateCar(updatedCar);
+    const validationError = validateCar(updatedCar);
+    if (validationError) {
+        return { error: validationError };
+    }
+
     cars[carIndex] = { ...cars[carIndex], ...updatedCar, id: carId };
     localStorage.setItem("cars", JSON.stringify(cars));
+    return { success: true };
 }
 
 /**
  * Removes a car listing from Local Storage.
- *  - The ID of the car to remove.
+ * @param {number} carId - The ID of the car to remove.
+ * @returns {Object} Result object with success status or an error message.
  */
 export function removeCar(carId) {
     const cars = getCars();
+    if (cars.error) return cars;
     const carIndex = cars.findIndex(car => car.id.toString() === carId.toString());
     if (carIndex === -1) {
-        throw new Error("Car not found");
+        return { error: "Car not found" };
     }
-
     cars.splice(carIndex, 1);
     localStorage.setItem("cars", JSON.stringify(cars));
+    return { success: true };
+}
+
+// === Users Functions ===
+
+/**
+ * Retrieves all users from Local Storage.
+ * @returns {Array|Object} An array of users or an error object.
+ */
+export function getUsers() {
+    const usersData = localStorage.getItem("users");
+    if (!usersData) {
+        return [];
+    }
+
+    const users = JSON.parse(usersData);
+    if (!Array.isArray(users)) {
+        return { error: "Users data is not an array" };
+    }
+
+    return users;
+}
+
+/**
+ * Validates a user object.
+ * @param {Object} user - The user object to validate.
+ * @returns {string|null} Error message if validation fails, null otherwise.
+ */
+function validateUser(user) {
+    const requiredFields = ["id", "name", "email", "phone", "address"];
+
+    for (const field of requiredFields) {
+        if (!user[field] || (typeof user[field] === "string" && user[field].trim() === "")) {
+            return `${field} is required`;
+        }
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(user.email)) {
+        return "Invalid email format";
+    }
+
+    // Validate phone format (basic check for digits and optional dashes)
+    
+const phoneRegex = /^\d{11}$/;
+if (!phoneRegex.test(user.phone)) {
+    return "Invalid phone number format. Must be exactly 11 digits.";
+}
+
+return null;
+}
+
+/**
+ * Adds a new user to Local Storage.
+ * @param {Object} user - The user object to add.
+ * @returns {Object} Result object with the added user or an error message.
+ */
+export function addUser(user) {
+    const validationError = validateUser(user);
+    if (validationError) {
+        return { error: validationError };
+    }
+
+    const users = getUsers();
+    if (users.error) return users;
+
+    users.push(user);
+    localStorage.setItem("users", JSON.stringify(users));
+    return { success: true, user };
+}
+
+/**
+ * Updates an existing user.
+ * @param {number} userId - The ID of the user to update.
+ * @param {Object} updatedUser - The updated user object.
+ * @returns {Object} Result object with success status or an error message.
+ */
+export function updateUser(userId, updatedUser) {
+    const users = getUsers();
+    if (users.error) return users;
+
+    const userIndex = users.findIndex(user => user.id.toString() === userId.toString());
+    if (userIndex === -1) {
+        return { error: "User not found" };
+    }
+
+    const validationError = validateUser(updatedUser);
+    if (validationError) {
+        return { error: validationError };
+    }
+
+    users[userIndex] = { ...users[userIndex], ...updatedUser, id: userId };
+    localStorage.setItem("users", JSON.stringify(users));
+    return { success: true };
+}
+
+/**
+ * Removes a user from Local Storage.
+ * @param {number} userId - The ID of the user to remove.
+ * @returns {Object} Result object with success status or an error message.
+ */
+export function removeUser(userId) {
+    const users = getUsers();
+    if (users.error) return users;
+
+    const userIndex = users.findIndex(user => user.id.toString() === userId.toString());
+    if (userIndex === -1) {
+        return { error: "User not found" };
+    }
+
+    users.splice(userIndex, 1);
+    localStorage.setItem("users", JSON.stringify(users));
+    return { success: true };
 }
 
 // === Rental Reports Functions ===
 
 /**
  * Generates a report of bookings per month.
- *  An object with months as keys and booking counts as values.
+ * @returns {Object} An object with months as keys and booking counts as values or an error.
  */
 export function getBookingsPerMonth() {
     const bookings = getBookings();
-    const bookingsPerMonth = {};
+    if (bookings.error) return bookings;
 
+    const bookingsPerMonth = {};
     bookings.forEach(booking => {
         const date = new Date(booking.date);
         const monthYear = `${date.getFullYear()}-${date.getMonth() + 1}`; // Format: YYYY-MM
@@ -201,11 +338,13 @@ export function getBookingsPerMonth() {
 
 /**
  * Generates a report of peak hours for bookings.
+ * @returns {Object} An object with hours as keys and booking counts as values or an error.
  */
 export function getPeakHours() {
     const bookings = getBookings();
-    const peakHours = {};
+    if (bookings.error) return bookings;
 
+    const peakHours = {};
     bookings.forEach(booking => {
         const date = new Date(booking.date);
         const hour = date.getHours();

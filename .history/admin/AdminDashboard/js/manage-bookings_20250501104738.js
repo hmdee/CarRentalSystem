@@ -1,4 +1,4 @@
-import { getBookings, updateBookingStatus, getCars } from "./modules/storage.js";
+import { getBookings, updateBookingStatus, getCars } from "../js/modules/storage.js";
 
     // Get bookings and cars
     const bookings = getBookings();
