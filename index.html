@@ -12,7 +12,7 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Your CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Home Page</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
     <!-- Header -->
     <nav class="navbar navbar-expand-lg shadow fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">Drivee.</a>
+            <a class="navbar-brand fw-bold" href="index.html">Drivee.</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -51,8 +51,8 @@
                 </ul>
 
                 <div id="authArea" class="d-flex align-items-center gap-2">
-                    <button class="btn btn-sm" id="loginBtn">Log in</button>
-                    <button class="btn btn-sm" id="signupBtn">Sign Up</button>
+                    <button class="btn btn-sm fw-bold" id="loginBtn">Log in</button>
+                    <button class="btn btn-sm fw-bold custom-btn" id="signupBtn">Sign Up</button>
 
                     <div id="userIcon" class="d-none">
                         <img src="imgs/person-circle.svg" alt="User" width="32" height="32" class="rounded-circle">
@@ -72,11 +72,11 @@
     <section class="landing-page" id="home">
         <section class="container d-flex justify-content-between align-items-center gap-4 flex-column flex-md-row">
             <article class="left-info col-12 col-md-6">
-                <h1>Unlock Endless Driving With Drivee</h1>
+                <h1 class="fw-bold">Unlock Endless Driving With Drivee</h1>
                 <p>
                     To contribute to positive change and achieve our sustainability goals with many extraordinary
                 </p>
-                <button class="btn" id="rentCarBtn">Rent Car</button>
+                <button class="btn custom-btn fw-bold" id="rentCarBtn">Rent Car</button>
             </article>
     
             <figure class="col-12 col-md-6 d-flex justify-content-center align-items-center">
@@ -90,11 +90,11 @@
         <div class="container">
             <div class="row align-items-center gap-md-0 gap-5">
                 <div class="col-md-6">
-                    <h2>About Us📖</h2>
+                    <h2 class="fw-bold">About Us📖</h2>
                     <p>
                         We are a dedicated team behind a seamless car rental system designed to make your travel effortless. Our mission is to provide you with a hassle-free experience, offering a wide range of vehicles to suit your needs. Whether you're planning a quick getaway or a long road trip, we’ve got you covered with our easy-to-use platform. Rent a car, hit the road, and explore with confidence!
                     </p>
-                    <a href="" class="btn">Learn More</a>
+                    <a href="#" class="btn fw-bold custom-btn">Learn More</a>
                 </div>
 
                 <figure class="col-md-6">
@@ -119,20 +119,18 @@
                         <div class="card-body">
                             <h5 class="card-title mb-3 fw-bold">Toyota Hilux</h5>
                             <div class="row text-muted mb-3">
+                                <p class="col-6 mb-2">Year: 2020</p>
                                 <p class="col-6 mb-2">Seats: 5</p>
-                                <p class="col-6 mb-2">Horsepower: 200</p>
-                                <p class="col-6 mb-2">Luggage: 3</p>
-                                <p class="col-6 mb-2">Engine: 2800</p>
-                                <p class="col-6 mb-2">Doors: 4</p>
-                                <p class="col-6 mb-2">Drive: 4x4</p>
+                                <p class="col-6 mb-2">Mile Age: 40000</p>
                                 <p class="col-6 mb-2">Fuel: Diesel</p>
-                                <p class="col-6 mb-2">Type: Off-Road</p>
+                                <p class="col-6 mb-2">Transmission: Manual</p>
+                                <p class="col-6 mb-2">Available</p>
                             </div>
                             <div class="mb-3">
-                                <small class="d-block">Per Hour</small>
-                                <h5 class="fw-bold">$56</h5>
+                                <small class="d-block">Per Day</small>
+                                <h5 class="fw-bold">$700</h5>
                             </div>
-                            <a href="#" class="btn w-100">Rent Car</a>
+                            <a href="#" class="btn w-100 custom-btn fw-bold">Rent Car</a>
                         </div>
                     </div>
                 </div>
@@ -146,20 +144,18 @@
                         <div class="card-body">
                             <h5 class="card-title mb-3 fw-bold">Ford Mustang</h5>
                             <div class="row text-muted mb-3">
+                                <p class="col-6 mb-2">Year: 2021</p>
                                 <p class="col-6 mb-2">Seats: 4</p>
-                                <p class="col-6 mb-2">Horsepower: 450</p>
-                                <p class="col-6 mb-2">Luggage: 2</p>
-                                <p class="col-6 mb-2">Engine: 5000</p>
-                                <p class="col-6 mb-2">Doors: 2</p>
-                                <p class="col-6 mb-2">Drive: Sports</p>
+                                <p class="col-6 mb-2">Mile Age: 15000</p>
                                 <p class="col-6 mb-2">Fuel: Gasoline</p>
-                                <p class="col-6 mb-2">Type: Convertible</p>
+                                <p class="col-6 mb-2">Transmission: Automatic</p>
+                                <p class="col-6 mb-2">Available</p>
                             </div>
                             <div class="mb-3">
-                                <small class="d-block">Per Hour</small>
-                                <h5 class="fw-bold">$112</h5>
+                                <small class="d-block">Per Day</small>
+                                <h5 class="fw-bold">$1800</h5>
                             </div>
-                            <a href="#" class="btn w-100">Rent Car</a>
+                            <a href="#" class="btn w-100 custom-btn fw-bold">Rent Car</a>
                         </div>
                     </div>
                 </div>
@@ -173,20 +169,18 @@
                         <div class="card-body">
                             <h5 class="card-title mb-3 fw-bold">Jeep Wrangler</h5>
                             <div class="row text-muted mb-3">
+                                <p class="col-6 mb-2">Year: 2022</p>
                                 <p class="col-6 mb-2">Seats: 5</p>
-                                <p class="col-6 mb-2">Horsepower: 285</p>
-                                <p class="col-6 mb-2">Luggage: 4</p>
-                                <p class="col-6 mb-2">Engine: 3600</p>
-                                <p class="col-6 mb-2">Doors: 4</p>
-                                <p class="col-6 mb-2">Drive: 4x4</p>
+                                <p class="col-6 mb-2">Mile Age: 9000</p>
                                 <p class="col-6 mb-2">Fuel: Gasoline</p>
-                                <p class="col-6 mb-2">Type: Off-Road</p>
+                                <p class="col-6 mb-2">Transmission: Automatic</p>
+                                <p class="col-6 mb-2">Available</p>
                             </div>
                             <div class="mb-3">
-                                <small class="d-block">Per Hour</small>
-                                <h5 class="fw-bold">$81</h5>
+                                <small class="d-block">Per Day</small>
+                                <h5 class="fw-bold">$1300</h5>
                             </div>
-                            <a href="#" class="btn w-100">Rent Car</a>
+                            <a href="#" class="btn w-100 custom-btn fw-bold">Rent Car</a>
                         </div>
                     </div>
                 </div>
@@ -205,11 +199,11 @@
                     <div class="card h-100 offer-card">
                         <div class="card-body text-center d-flex flex-column justify-content-between">
                             <div>
-                                <h3 class="card-title mb-2">Special Offer: Corporate Fleet</h3>
+                                <h3 class="card-title fw-bold mb-2">Special Offer: Corporate Fleet</h3>
                                 <p class="text-muted mb-4">Premium vehicles for your business at 20% off!</p>
                                 <img src="./imgs/Mercedes-C-Class-Offer.png" class="mb-4" alt="Blue Sedan">
                             </div>
-                            <a href="carsListings.html" class="btn btn-outline-light rounded-pill px-4">Discover the Fleet of Vehicles</a>
+                            <a href="carsListings.html" class="btn custom-btn fw-bold btn-outline-light rounded-pill px-4">Discover the Fleet of Vehicles</a>
                         </div>
                     </div>
                 </div>
@@ -219,11 +213,11 @@
                     <div class="card h-100 offer-card">
                         <div class="card-body text-center d-flex flex-column justify-content-between">
                             <div>
-                                <h3 class="card-title mb-2">Special Offer: Corporate Fleet</h3>
+                                <h3 class="card-title fw-bold mb-2">Special Offer: Corporate Fleet</h3>
                                 <p class="text-muted mb-4">Luxury SUVs for your team – save 15% today!</p>
                                 <img src="./imgs/Kia-Sportage-offer.png" class="img-fluid mb-4" alt="Grey SUV">
                             </div>
-                            <a href="carsListings.html" class="btn btn-outline-light rounded-pill px-4">Discover the Fleet of Vehicles</a>
+                            <a href="carsListings.html" class="btn custom-btn fw-bold btn-outline-light rounded-pill px-4">Discover the Fleet of Vehicles</a>
                         </div>
                     </div>
                 </div>

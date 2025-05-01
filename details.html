@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Swiper js CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- details CSS File -->
+    <link rel="stylesheet" href="css/details.css">
+    <title>Car Details</title>
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <div id="themeToggle">
+        <i class="bi bi-brightness-high" id="themeIcon"></i>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg shadow fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Drivee.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-lg-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#featuredVehicles">Featured vehicles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#offers">Offers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="carsListings.html">Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#categories">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+
+                <div id="authArea" class="d-flex align-items-center gap-2">
+                    <button class="btn btn-sm" id="loginBtn">Log in</button>
+                    <button class="btn btn-sm custom-btn" id="signupBtn">Sign Up</button>
+
+                    <div id="userIcon" class="d-none">
+                        <img src="imgs/person-circle.svg" alt="User" width="32" height="32" class="rounded-circle">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Car Details -->
+    <main class="details">
+        <div class="container" id="carDetailsContainer">
+            <!-- Car details (details.js) -->
+        </div>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-12 col-sm-6 col-md-3">
+                    <h5 class="logo">Drivee.</h5>
+                    <p class="para">Is Just A Drivee Ride Away-Take Control Of Your Journey Today</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-sm-6 col-md-3">
+                    <h5 class="title">Links</h5>
+                    <ul class="links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#featuredVehicles">Featured Vehicles</a></li>
+                        <li><a href="index.html#offers">Offers</a></li>
+                        <li><a href="index.html#categories">Categories</a></li>
+                        <li><a href="">Privacy Policy</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-sm-6 col-md-3">
+                    <h5 class="title">City</h5>
+                    <ul class="cities">
+                        <li>Cairo</li>
+                        <li>Giza</li>
+                        <li>Alex</li>
+                        <li>Ismailia</li>
+                        <li>Sharqiya</li>
+                        <li>Minya</li>
+                        <li>Sohag</li>
+                    </ul>
+                </div>
+                
+                <div class="col-sm-6 col-md-3">
+                    <h5 class="title">Vehicle Type</h5>
+                    <ul>
+                        <li>Car</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Swiper CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <!-- Bootstrap CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="./js/homeScript.js"></script>
+    <script src="./js/carsListing.js"></script>
+    <script src="./js/carDetails.js"></script>
+
+</body>
+</html>
