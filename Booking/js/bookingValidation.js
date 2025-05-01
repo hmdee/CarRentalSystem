@@ -1,5 +1,8 @@
 const pickUpDateError = document.getElementById("pickUpDateError");
 const DropOffDateError = document.getElementById("DropOffDateError");
+  const pickUpDate = new Date().toISOString().split('T')[0];
+  document.getElementById("pickUpDate").setAttribute("min", pickUpDate);
+
 export default function validateAllInputs(
   pickUpDate,
   DropOffDate,
