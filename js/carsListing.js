@@ -1,38 +1,30 @@
-let carsContainer = document.getElementById("carsList");
-let originalCars = []; // Store the original cars array for filtering
 
-// Async function to fetch cars data from local JSON file
-async function fetchCars() {
-    try {
-        // Show loading spinner
-        if (carsContainer) {
-            carsContainer.innerHTML = `
-                <div class="col-12 text-center py-5">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </div>
-            `;
+import { getCars } from "../admin/AdminDashboard/js/modules/storage.js";
+
+
+// this function will fetch data from json and set it in localStorage
+async function setCarsToLocalStorage() {
+    const existingCars = localStorage.getItem("cars");
+    if (existingCars === null) {
+        try {
+            const res = await fetch('../cars.json');
+            const data = await res.json();
+            if (data.cars) {
+                localStorage.setItem("cars", JSON.stringify(data.cars));
+                console.log("Cars added to localStorage");
+            }
+        } catch (error) {
+            console.log("Error in setting cars to localStorage ", error);
         }
-        let res = await fetch('./cars.json');
-        let cars = await res.json();
-        return cars;
-    } catch (error) {
-        console.error("Fetching cars data fails: ", error);
-        if (carsContainer) {
-            carsContainer.innerHTML = `
-                <div class="col-12 text-center py-5">
-                    <p class="text-danger">Failed to load cars. Please try again later.</p>
-                </div>
-            `;
-        }
-        return [];
     }
 }
 
+
+let carsContainer = document.getElementById("carsList");
+
 // Function to build car list DOM
 function buildCarLists(arr) {
-    // Clear existing content with fade-out
+
     if (carsContainer) {
         carsContainer.classList.add('fade-out');
         setTimeout(() => {
@@ -48,7 +40,8 @@ function buildCarLists(arr) {
                 return;
             }
 
-            arr.forEach((car, index) => {
+            arr.forEach((car) => {
+
                 let carDiv = document.createElement("div");
                 carDiv.className = "car-item col-12 col-md-6 col-lg-4 animate-card";
                 carDiv.id = car.id;
@@ -75,7 +68,7 @@ function buildCarLists(arr) {
                     </div>
                 `;
                 carsContainer.appendChild(carDiv);
-                // Handle click for every car
+
                 carDiv.addEventListener('click', function () {
                     let car_id = this.id;
                     let targettedCar = arr.find(car => car.id === Number(car_id));
@@ -83,11 +76,17 @@ function buildCarLists(arr) {
                     window.location.href = './details.html';
                 });
             });
-        }, 300); // Match fade-out duration
+
+        }, 300);
     }
 }
 
-// Function to apply filters and update car list
+
+// =================================================================================================
+let originalCars = []; // store the original cars array for filtering
+
+// function to apply filters and update car list
+
 function applyFilters() {
     let searchInput = document.getElementById("searchInput")?.value.toLowerCase() || '';
     let minPrice = parseFloat(document.getElementById("minPrice")?.value) || 0;
@@ -95,13 +94,10 @@ function applyFilters() {
     let availableOnly = document.getElementById("availableOnly")?.checked || false;
 
     let filteredCars = originalCars.filter(car => {
-        // Search by model
-        let matchesSearch = car.model.toLowerCase().includes(searchInput);
-        // Filter by price range
-        let matchesPrice = car.price_per_day >= minPrice && car.price_per_day <= maxPrice;
-        // Filter by availability
-        let matchesAvailability = availableOnly ? car.available : true;
 
+        let matchesSearch = car.model.toLowerCase().includes(searchInput);
+        let matchesPrice = car.price_per_day >= minPrice && car.price_per_day <= maxPrice;
+        let matchesAvailability = availableOnly ? car.available : true;
         return matchesSearch && matchesPrice && matchesAvailability;
     });
 
@@ -109,17 +105,16 @@ function applyFilters() {
 }
 
 // initialize the page
-document.addEventListener('DOMContentLoaded', () => {
-    // display cars
-    fetchCars().then(cars => {
-        if (cars && cars.cars) {
-            originalCars = cars.cars; // store original data
-            buildCarLists(originalCars);
-        }
-    });
+document.addEventListener('DOMContentLoaded', async () => {
+    await setCarsToLocalStorage(); // here if data doesn't exist for any reason, it will stored
+    originalCars = getCars(); 
+    buildCarLists(originalCars);
+
 
     document.getElementById("searchInput")?.addEventListener('input', applyFilters);
     document.getElementById("minPrice")?.addEventListener('input', applyFilters);
     document.getElementById("maxPrice")?.addEventListener('input', applyFilters);
     document.getElementById("availableOnly")?.addEventListener('change', applyFilters);
+
 });
+

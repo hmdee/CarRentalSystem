@@ -42,6 +42,18 @@ if (rentCarBtn) {
     });
 }
 
+// Handle Click When login on signup
+const loginBtn = document.getElementById('loginBtn');
+const signupBtn = document.getElementById('signupBtn');
+
+loginBtn.addEventListener('click', function () {
+    window.location.href = '../Login/Login.html';
+});
+
+signupBtn.addEventListener('click', function () {
+    window.location.href = '../Register/Register.html';
+});
+
 
 // Handle Slider (Swiper JS Library)
 var swiper = new Swiper(".mySwiper", {
