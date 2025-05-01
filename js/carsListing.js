@@ -1,6 +1,7 @@
 import { getCars } from "../admin/AdminDashboard/js/modules/storage.js";
 
-
+// localStorage.clear();
+console.log(getCars());
 // this function will fetch data from json and set it in localStorage
 async function setCarsToLocalStorage() {
     const existingCars = localStorage.getItem("cars");
@@ -69,6 +70,7 @@ function buildCarLists(arr) {
                     let car_id = this.id;
                     let targettedCar = arr.find(car => car.id === Number(car_id));
                     localStorage.setItem('selectedCar', JSON.stringify(targettedCar));
+                    console.log(localStorage.getItem("selectedCar"));
                     window.location.href = './details.html';
                 });
             });

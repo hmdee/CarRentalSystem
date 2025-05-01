@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <h4 class='fw-bold'>${carData.available ? 'Available' : 'Not Available'}</h4>
                     <p class='price'>$${carData.price_per_day} <span>/Per Day</span></p>
                 </div>
-                <a ${carData.available ? 'href="booking.html"' : ''} class="btn fw-bold book-btn custom-btn mt-3 w-full d-block ${carData.available ? 'pe-auto' : 'pe-none opacity-50'}">Book Now</a>
+                <a ${carData.available ? 'href="../Booking/booking.html"' : ''} class="btn fw-bold book-btn custom-btn mt-3 w-full d-block ${carData.available ? 'pe-auto' : 'pe-none opacity-50'}">Book Now</a>
             </div>
         </div>
     `;
