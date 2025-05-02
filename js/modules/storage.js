@@ -7,7 +7,7 @@
 
 /**
  * Retrieves all bookings from Local Storage.
-*/
+ */
 export function getBookings() {
     const bookingsData = localStorage.getItem("bookings");
     if (!bookingsData) {
@@ -72,21 +72,58 @@ export function updateBookingStatus(bookingId, newStatus) {
 // === Car Listings Functions ===
 
 /**
- * Retrieves all car listings from Local Storage.
+ * Imports all cars from cars.json and stores them in Local Storage.
+ * @returns {Promise<void>}
+ */
+export async function importAllCars() {
+    try {
+        const res = await fetch('../cars.json');
+        if (!res.ok) {
+            throw new Error(`Failed to fetch cars.json: ${res.statusText}`);
+        }
+        const response = await res.json();
+        
+        // Check if response has a 'cars' field and it's an array
+        if (response.cars && Array.isArray(response.cars)) {
+            localStorage.setItem("cars", JSON.stringify(response.cars));
+            console.log("Cars imported successfully from cars.json:", response.cars);
+        } else if (Array.isArray(response)) {
+            localStorage.setItem("cars", JSON.stringify(response));
+            console.log("Cars imported directly from cars.json:", response);
+        } else {
+            throw new Error("Invalid data format in cars.json: Expected an array or object with 'cars' array");
+        }
+    } catch (error) {
+        console.error("Error importing cars from cars.json:", error.message);
+        localStorage.setItem("cars", JSON.stringify([])); // Set empty array to avoid further issues
+    }
+}
+
+/**
+ * Retrieves all car listings from Local Storage, imports from cars.json if empty.
  * @returns {Array|Object} An array of cars or an error object.
  */
-export function getCars() {
-    const carsData = localStorage.getItem("cars");
+export async function getCars() {
+    let carsData = localStorage.getItem("cars");
     if (!carsData) {
-        return [];
+        await importAllCars(); // Import from cars.json if not in localStorage
+        carsData = localStorage.getItem("cars");
+        if (!carsData) {
+            return { error: "No cars data available after import attempt" };
+        }
     }
 
-    const cars = JSON.parse(carsData);
-    if (!Array.isArray(cars)) {
-        return { error: "Cars data is not an array" };
+    try {
+        const cars = JSON.parse(carsData);
+        if (!Array.isArray(cars)) {
+            console.warn("Parsed cars data is not an array:", cars);
+            return { error: "Cars data is not an array. Data: " + JSON.stringify(cars) };
+        }
+        return cars;
+    } catch (error) {
+        console.error("Error parsing cars data from localStorage:", error.message, "Raw data:", carsData);
+        return { error: "Failed to parse cars data from localStorage. Raw data: " + carsData };
     }
-
-    return cars;
 }
 
 /**
@@ -155,14 +192,16 @@ function validateCar(car) {
  * @param {Object} car - The car object to add.
  * @returns {Object} Result object with the added car or an error message.
  */
-export function addCar(car) {
+export async function addCar(car) {
     const validationError = validateCar(car);
     if (validationError) {
         return { error: validationError };
     }
 
-    const cars = getCars();
-    if (cars.error) return cars;
+    const cars = await getCars(); // Use await since getCars is async
+    if (!Array.isArray(cars)) {
+        return { error: cars.error || "Cannot add car: Existing cars data is not an array" };
+    }
 
     cars.push(car);
     localStorage.setItem("cars", JSON.stringify(cars));
@@ -175,9 +214,11 @@ export function addCar(car) {
  * @param {Object} updatedCar - The updated car object.
  * @returns {Object} Result object with success status or an error message.
  */
-export function updateCar(carId, updatedCar) {
-    const cars = getCars();
-    if (cars.error) return cars;
+export async function updateCar(carId, updatedCar) {
+    const cars = await getCars(); // Use await since getCars is async
+    if (!Array.isArray(cars)) {
+        return { error: cars.error || "Cannot update car: Existing cars data is not an array" };
+    }
 
     const carIndex = cars.findIndex(car => car.id.toString() === carId.toString());
     if (carIndex === -1) {
@@ -199,13 +240,17 @@ export function updateCar(carId, updatedCar) {
  * @param {number} carId - The ID of the car to remove.
  * @returns {Object} Result object with success status or an error message.
  */
-export function removeCar(carId) {
-    const cars = getCars();
-    if (cars.error) return cars;
+export async function removeCar(carId) {
+    const cars = await getCars(); // Use await since getCars is async
+    if (!Array.isArray(cars)) {
+        return { error: cars.error || "Cannot remove car: Existing cars data is not an array" };
+    }
+
     const carIndex = cars.findIndex(car => car.id.toString() === carId.toString());
     if (carIndex === -1) {
         return { error: "Car not found" };
     }
+
     cars.splice(carIndex, 1);
     localStorage.setItem("cars", JSON.stringify(cars));
     return { success: true };
@@ -252,13 +297,12 @@ function validateUser(user) {
     }
 
     // Validate phone format (basic check for digits and optional dashes)
-    
-const phoneRegex = /^\d{11}$/;
-if (!phoneRegex.test(user.phone)) {
-    return "Invalid phone number format. Must be exactly 11 digits.";
-}
+    const phoneRegex = /^\d{11}$/;
+    if (!phoneRegex.test(user.phone)) {
+        return "Invalid phone number format. Must be exactly 11 digits.";
+    }
 
-return null;
+    return null;
 }
 
 /**
