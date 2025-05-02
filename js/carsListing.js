@@ -1,31 +1,10 @@
-
-import { getCars } from "../admin/AdminDashboard/js/modules/storage.js";
-
-// localStorage.clear();
-console.log(getCars());
-// this function will fetch data from json and set it in localStorage
-async function setCarsToLocalStorage() {
-    const existingCars = localStorage.getItem("cars");
-    if (existingCars === null) {
-        try {
-            const res = await fetch('../cars.json');
-            const data = await res.json();
-            if (data.cars) {
-                localStorage.setItem("cars", JSON.stringify(data.cars));
-                console.log("Cars added to localStorage");
-            }
-        } catch (error) {
-            console.log("Error in setting cars to localStorage ", error);
-        }
-    }
-}
-
+import { getCars } from "../js/modules/storage.js";
 
 let carsContainer = document.getElementById("carsList");
+let originalCars = []; // Store the original cars array for filtering
 
 // Function to build car list DOM
 function buildCarLists(arr) {
-
     if (carsContainer) {
         carsContainer.classList.add('fade-out');
         setTimeout(() => {
@@ -42,7 +21,6 @@ function buildCarLists(arr) {
             }
 
             arr.forEach((car) => {
-
                 let carDiv = document.createElement("div");
                 carDiv.className = "car-item col-12 col-md-6 col-lg-4 animate-card";
                 carDiv.id = car.id;
@@ -74,21 +52,14 @@ function buildCarLists(arr) {
                     let car_id = this.id;
                     let targettedCar = arr.find(car => car.id === Number(car_id));
                     localStorage.setItem('selectedCar', JSON.stringify(targettedCar));
-                    console.log(localStorage.getItem("selectedCar"));
                     window.location.href = './details.html';
                 });
             });
-
         }, 300);
     }
 }
 
-
-// =================================================================================================
-let originalCars = []; // store the original cars array for filtering
-
-// function to apply filters and update car list
-
+// Function to apply filters and update car list
 function applyFilters() {
     let searchInput = document.getElementById("searchInput")?.value.toLowerCase() || '';
     let minPrice = parseFloat(document.getElementById("minPrice")?.value) || 0;
@@ -96,7 +67,6 @@ function applyFilters() {
     let availableOnly = document.getElementById("availableOnly")?.checked || false;
 
     let filteredCars = originalCars.filter(car => {
-
         let matchesSearch = car.model.toLowerCase().includes(searchInput);
         let matchesPrice = car.price_per_day >= minPrice && car.price_per_day <= maxPrice;
         let matchesAvailability = availableOnly ? car.available : true;
@@ -106,17 +76,43 @@ function applyFilters() {
     buildCarLists(filteredCars);
 }
 
-// initialize the page
-document.addEventListener('DOMContentLoaded', async () => {
-    await setCarsToLocalStorage(); // here if data doesn't exist for any reason, it will stored
-    originalCars = getCars(); 
+// Initialize the page
+document.addEventListener('DOMContentLoaded', () => {
+    // Fetch cars from localStorage using getCars
+    const carsData = getCars();
+    
+    // Handle errors from getCars
+    if (carsData.error) {
+        console.error("Error fetching cars:", carsData.error);
+        if (carsContainer) {
+            carsContainer.innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <p class="sorry_msg">Error loading cars. Please try again later.</p>
+                </div>
+            `;
+        }
+        return;
+    }
+
+    // If no cars are found, display a message
+    if (!carsData || carsData.length === 0) {
+        if (carsContainer) {
+            carsContainer.innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <p class="sorry_msg">No cars available at the moment.</p>
+                </div>
+            `;
+        }
+        return;
+    }
+
+    // Store the cars in originalCars and render them
+    originalCars = carsData;
     buildCarLists(originalCars);
 
-
+    // Add event listeners for filters
     document.getElementById("searchInput")?.addEventListener('input', applyFilters);
     document.getElementById("minPrice")?.addEventListener('input', applyFilters);
     document.getElementById("maxPrice")?.addEventListener('input', applyFilters);
     document.getElementById("availableOnly")?.addEventListener('change', applyFilters);
-
 });
-
