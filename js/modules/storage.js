@@ -141,6 +141,14 @@ function validateCar(car) {
 
     return null;
 }
+// export default async function importAllCars()
+// {
+//  let res =await fetch('../../cars.json');
+//  let response= await res.json()
+//  localStorage.setItem('cars',JSON.stringify(response))
+//  console.log(response);
+//   return 
+// }
 
 /**
  * Adds a new car listing to Local Storage.

@@ -1,4 +1,4 @@
-import { getCars, addCar, updateCar, removeCar } from "../js/modules/storage.js";
+import  { getCars, addCar, updateCar, removeCar } from "../js/modules/storage.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const carModal = new bootstrap.Modal(document.getElementById("carModal"));
     const openCarModalBtn = document.getElementById("open-car-modal");
 
-    
+
     const showError = (message) => {
         carErrorDiv.innerHTML = `
             ${message}
@@ -206,3 +206,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderCars();
 });
+
+

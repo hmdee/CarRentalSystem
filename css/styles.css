@@ -1,6 +1,6 @@
 /* إعدادات عامة للوضع النهاري */
 :root {
-    --primary-color: #FF6B00;
+    --primary-color: #252526;
     --background-color: #FFFFFF;
     --card-background: #F5F5F7;
     --main-text: #1D1D1F;
@@ -8,20 +8,20 @@
     --border-color: #E5E5EA;
     --main-content-bg: #E5E5EA;
     --navbar-height: 60px;
-    --table-bg: #FFFFFF; /* لون خلفية الجدول في الوضع النهاري */
+    --table-bg: #FFFFFF;
     --table-stripe-bg: rgba(0, 0, 0, 0.05);
 }
 
 /* تطبيق الوضع الليلي عند إضافة الكلاس dark-mode */
 html.dark-mode {
-    --primary-color: #FF6B00;
+    --primary-color: #252526;
     --background-color: #1D1D1F;
     --card-background: #2C2C2E;
     --main-text: #FFFFFF;
     --secondary-text: #B3B3B3;
     --border-color: #3A3A3C;
     --main-content-bg: #2C2C2E;
-    --table-bg: #252526; /* لون خلفية الجدول في الوضع الليلي */
+    --table-bg: #252526;
     --table-stripe-bg: #303031;
 }
 
@@ -102,12 +102,11 @@ body {
 }
 
 .table {
-    background-color: var(--table-bg); /* لون خلفية الجدول */
+    background-color: var(--table-bg);
 }
 
 .table th {
     font-weight: 400;
-   
     text-transform: uppercase;
     font-size: 14px;
     color: #1D1D1F;
@@ -140,7 +139,7 @@ body {
     background-color: var(--card-background);
     color: var(--main-text);
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.25rem rgba(255, 107, 0, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(68, 66, 66, 0.25);
 }
 
 .form-label {
@@ -152,9 +151,7 @@ body {
     color: var(--main-text);
 }
 
-.btn-close {
-    filter: var(--main-text) === #FFFFFF ? invert(1) : none;
-}
+
 
 footer {
     background-color: #343a40 !important;
@@ -176,7 +173,7 @@ footer .bi {
     margin-right: 10px;
 }
 
-/* الأزرار */
+
 button, .btn {
     font-size: 16px;
     font-weight: 500;
@@ -189,8 +186,8 @@ button, .btn {
 }
 
 .btn-primary:hover {
-    background-color: #e65f00;
-    border-color: #e65f00;
+    background-color: #252526;
+    border-color: #252526;
 }
 
 .btn-outline-secondary {
@@ -202,7 +199,7 @@ button, .btn {
     background-color: var(--border-color);
 }
 
-/* زر تبديل الوضع */
+
 #themeToggle {
     position: fixed;
     top: 50%;
@@ -219,17 +216,17 @@ button, .btn {
     justify-content: center;
     font-size: 1.5rem;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px #252526;
     transition: background-color 0.3s, transform 0.3s;
     z-index: 1000;
 }
 
 #themeToggle:hover {
-    background-color: #e65f00;
+    background-color: #ffffff;
     transform: translateY(-50%) scale(1.1);
 }
 
-/* التصميم المتجاوب */
+
 @media (max-width: 767.98px) {
     .sidebar {
         position: fixed;
@@ -296,4 +293,33 @@ h2 {
     font-size: 24px;
     font-weight: 500;
     color: var(--main-text);
+}
+
+
+.search {
+    background-color: #FFFFFF ;
+    color: var(--main-text);
+    border: 1px solid var(--border-color);
+}
+
+
+.search:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem #252526;
+}
+
+
+html.dark-mode .search {
+    background-color: #FFFFFF ;
+    color: #1D1D1F;
+    border: 1px solid var(--border-color);
+}
+
+
+html.dark-mode .search :focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem #252526;
+}
+html.dark-mode label[for="filter-available"] {
+    color: #FFFFFF ; 
 }
