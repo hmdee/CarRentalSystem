@@ -1,5 +1,4 @@
-
-import { getCars } from "../admin/AdminDashboard/js/modules/storage.js";
+import { getCars } from "../admin/New folder (5) - Copy/js/modules/storage.js";
 
 
 // this function will fetch data from json and set it in localStorage
