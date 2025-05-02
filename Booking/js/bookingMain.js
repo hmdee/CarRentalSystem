@@ -30,7 +30,7 @@ const imageContainer = document.createElement("div");
 imageContainer.className = "image-container w-100 ";
 const carImage = document.createElement("img");
 carImage.classList.add("img-fluid");
-carImage.src = `../${selectedCar.image}`;
+carImage.src = `${selectedCar.image.startsWith('data') ? '' : '../'}${selectedCar.image}`;
 carImage.alt = selectedCar.model;
 
 imageContainer.appendChild(carImage);

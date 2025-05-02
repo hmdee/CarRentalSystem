@@ -1,7 +1,6 @@
-import { getCars, addCar, updateCar, removeCar } from "../js/modules/storage.js";
+import  { getCars, addCar, updateCar, removeCar, removeUser } from "../js/modules/storage.js";
 
-document.addEventListener('DOMContentLoaded', () => {
-    // DOM Elements
+document.addEventListener('DOMContentLoaded', async () => {
     const carsTableBody = document.getElementById("cars-table");
     const carErrorDiv = document.getElementById('car-error');
     const carForm = document.getElementById("car-form");
@@ -13,15 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const carModal = new bootstrap.Modal(document.getElementById("carModal"));
     const openCarModalBtn = document.getElementById("open-car-modal");
 
-    
+
     const showError = (message) => {
-        carErrorDiv.innerHTML = `
-            ${message}
-        `;
+        carErrorDiv.innerHTML = `${message}`;
         carErrorDiv.classList.remove('d-none');
     };
 
-    // Show modal when clicking "Add New Car"
     openCarModalBtn.addEventListener("click", () => {
         carForm.reset();
         carIdInput.value = "";
@@ -31,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
         carModal.show();
     });
 
-    // Preview image and store as base64
     carImageInput.addEventListener("change", (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -46,18 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Create table row for a car
     const tableRow = (car) => {
         let newTr = document.createElement("tr");
 
-        // تنسيق الخصائص الخاصة
         let formattedCar = {
             image: `<img src="${car.image}" alt="${car.model}" style="max-width: 60px;">`,
             model: car.model,
             year: car.year,
             passengers: car.passengers,
             price_per_day: `$${car.price_per_day}`,
-            available: car.available === 'true' ? 'Yes' : 'No',
+            available: car.available === true ? 'Yes' : 'No',
             transmission: car.transmission,
             fuel_type: car.fuel_type,
             mileage: car.mileage,
@@ -65,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
             rating: car.rating || 'N/A'
         };
 
-        // إنشاء الخلايا بناءً على الخصائص المُنسقة
         for (let prop in formattedCar) {
             let newTd = document.createElement("td");
             newTd.innerHTML = formattedCar[prop];
@@ -75,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
             newTr.appendChild(newTd);
         }
 
-        // إضافة خلية الأزرار
         let actionsTd = document.createElement("td");
         actionsTd.innerHTML = `
             <button class="btn btn-sm btn-warning edit-car me-1" data-id="${car.id}">Edit</button>
@@ -86,56 +77,77 @@ document.addEventListener('DOMContentLoaded', () => {
         return newTr;
     };
 
-    // Render all cars in table
-    const renderCars = (carsToDisplay = getCars()) => {
-        if (carsToDisplay.error) {
-            showError(carsToDisplay.error);
-            return;
+    const renderCars = async (carsToDisplay = null) => {
+        let cars;
+        if (carsToDisplay && Array.isArray(carsToDisplay)) {
+            cars = carsToDisplay;
+        } else {
+            cars = await getCars();
         }
+
+        // إذا البيانات غير صالحة، نحاول استيرادها تلقائيًا مرة واحدة
+        if (!Array.isArray(cars)) {
+            console.warn("Invalid cars data, trying to re-import...");
+            const { importAllCars } = await import("../js/modules/storage.js");
+            await importAllCars();
+            cars = await getCars(); // إعادة المحاولة
+
+            if (!Array.isArray(cars)) {
+                showError(cars.error || "Failed to load cars: Data is not an array after re-import.");
+                carsTableBody.innerHTML = '<tr><td colspan="12" class="text-center">No cars available.</td></tr>';
+                return;
+            }
+        }
+
         carsTableBody.innerHTML = "";
-        carsToDisplay.forEach(car => carsTableBody.appendChild(tableRow(car)));
+        if (cars.length === 0) {
+            carsTableBody.innerHTML = '<tr><td colspan="12" class="text-center">No cars found.</td></tr>';
+        } else {
+            cars.forEach(car => carsTableBody.appendChild(tableRow(car)));
+        }
+
         attachActionListeners();
     };
 
-    // Search and filter functionality
-    const filterCars = () => {
+    const filterCars = async () => {
         const searchTerm = document.getElementById('search-cars').value.toLowerCase();
         const showAvailableOnly = document.getElementById('filter-available').checked;
-        let cars = getCars();
-        if (cars.error) {
-            showError(cars.error);
+        const cars = await getCars();
+
+        if (!Array.isArray(cars)) {
+            showError(cars.error || "Failed to load cars for filtering");
             return;
         }
 
+        let filteredCars = cars;
         if (searchTerm) {
-            cars = cars.filter(car =>
+            filteredCars = filteredCars.filter(car =>
                 car.model.toLowerCase().includes(searchTerm) ||
                 car.year.toString().includes(searchTerm)
             );
         }
 
         if (showAvailableOnly) {
-            cars = cars.filter(car => car.available === 'true');
+            filteredCars = filteredCars.filter(car => car.available === true);
         }
 
-        renderCars(cars);
+        await renderCars(filteredCars);
     };
 
-    // Search and filter event listeners
     document.getElementById('search-cars').addEventListener('input', filterCars);
     document.getElementById('filter-available').addEventListener('change', filterCars);
 
-    // Add/Edit Form Submit
-    carForm.addEventListener("submit", (event) => {
+    carForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         const formData = new FormData(carForm);
+        let availableValue; 
         const car = {
-            id: carIdInput.value || Date.now().toString(),
+            id: Number(carIdInput.value) || Date.now(),
             model: formData.get("model"),
             year: parseInt(formData.get("year")) || 0,
             passengers: parseInt(formData.get("passengers")) || 0,
             price_per_day: parseFloat(formData.get("price_per_day")) || 0,
-            available: formData.get("available"),
+            available: formData.get("available") === "true" || availableValue === true,
             transmission: formData.get("transmission"),
             fuel_type: formData.get("fuel_type"),
             mileage: parseInt(formData.get("mileage")) || 0,
@@ -146,9 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let result;
         if (carIdInput.value) {
-            result = updateCar(car.id, car);
+            result = await updateCar(car.id, car);
         } else {
-            result = addCar(car);
+            result = await addCar(car);
         }
 
         if (result.error) {
@@ -160,16 +172,21 @@ document.addEventListener('DOMContentLoaded', () => {
             carImageBase64Input.value = "";
             imagePreview.style.display = "none";
             carModal.hide();
-            renderCars();
+            await renderCars();
         }
     });
 
-    // Attach event listeners for Edit/Delete buttons
     const attachActionListeners = () => {
         document.querySelectorAll(".edit-car").forEach(button => {
-            button.addEventListener("click", () => {
+            button.addEventListener("click", async () => {
                 const carId = button.dataset.id;
-                const car = getCars().find(c => c.id.toString() === carId.toString());
+                const cars = await getCars();
+                if (!Array.isArray(cars)) {
+                    showError(cars.error || "Failed to load cars for editing");
+                    return;
+                }
+
+                const car = cars.find(c => c.id.toString() === carId.toString());
                 if (car) {
                     carIdInput.value = car.id;
                     document.getElementById("car-model").value = car.model;
@@ -177,6 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById("car-passengers").value = car.passengers;
                     document.getElementById("car-price").value = car.price_per_day;
                     document.getElementById("car-available").value = car.available;
+                    console.log(car.available);
                     document.getElementById("car-transmission").value = car.transmission;
                     document.getElementById("car-fuel-type").value = car.fuel_type;
                     document.getElementById("car-mileage").value = car.mileage;
@@ -192,17 +210,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         document.querySelectorAll('.delete-car').forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', async () => {
                 const carId = parseInt(button.getAttribute('data-id'));
-                const result = removeCar(carId);
+                const result = await removeCar(carId);
                 if (result.error) {
                     showError(result.error);
                 } else {
-                    renderCars();
+                    await renderCars();
                 }
             });
         });
     };
 
-    renderCars();
+
+
+    try {
+        await renderCars();
+    } catch (error) {
+        console.error("Error during initial render:", error);
+        showError("Failed to load cars initially. Please try again.");
+    }
 });
+
