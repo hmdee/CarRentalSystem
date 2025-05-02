@@ -160,3 +160,16 @@ label i {
   background-color: #5a4500;
   color: #f1f1f1;
 }
+
+.modal-content {
+  background-color: var(--main-bg-color);
+  color: var(--text-main);
+  border-radius: 10px;
+  padding: 20px;
+}
+#gotohomeBtn
+{
+  background: var(--btn-color);
+  color: var(--input-bg);
+  border: var(--btn-color);
+}

@@ -62,6 +62,8 @@ if(isAllInputsValid && DateValidation(pickUpDate.value, pickUpTime.value, DropOf
 let {totalDays,extraHours,totalPrice} = addBooking(pickUpDate.value, DropOffDate.value,pickUpTime.value,dropOffTime.value);
   bookingError.innerText=``
   modalBody.innerHTML = `
+  <p class="mb-2"><strong>Name:</strong> ${user.name}</p>
+  <p class="mb-2"><strong>Email:</strong> ${user.email}</p>
   <p class="mb-2"><strong>Car:</strong> ${selectedCar.model}</p>
   <p class="mb-2"><strong>Pick-up:</strong> ${pickUpDate.value} at ${pickUpTime.value}</p>
   <p class="mb-2"><strong>Drop-off:</strong> ${DropOffDate.value} at ${dropOffTime.value}</p>
