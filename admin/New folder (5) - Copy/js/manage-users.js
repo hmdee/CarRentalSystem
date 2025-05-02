@@ -124,7 +124,7 @@ const renderUsers = (usersToDisplay = getUsers()) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     // Check if user is logged in
-   /* const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    /*const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser) {
         alert('Please log in to access this page.');
         window.location.href = 'index.html';

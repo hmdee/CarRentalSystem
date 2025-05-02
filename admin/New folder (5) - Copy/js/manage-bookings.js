@@ -1,26 +1,4 @@
-import { getBookings, updateBookingStatus, getCars } from "../js/modules/storage.js";
-
-window.onload = async () => {
-    // Load navbar and footer
-    try {
-        const navbarResponse = await fetch("../components/navbar.html");
-        if (!navbarResponse.ok) throw new Error("Failed to load navbar");
-        const navbarText = await navbarResponse.text();
-        document.getElementById("navbar-placeholder").innerHTML = navbarText;
-    } catch (error) {
-        console.error(error.message);
-        document.getElementById("navbar-placeholder").innerHTML = "<p>Failed to load navbar.</p>";
-    }
-
-    try {
-        const footerResponse = await fetch("../components/footer.html");
-        if (!footerResponse.ok) throw new Error("Failed to load footer");
-        const footerText = await footerResponse.text();
-        document.getElementById("footer-placeholder").innerHTML = footerText;
-    } catch (error) {
-        console.error(error.message);
-        document.getElementById("footer-placeholder").innerHTML = "<p>Failed to load footer.</p>";
-    }
+import { getBookings, updateBookingStatus, getCars } from "./modules/storage.js";
 
     // Get bookings and cars
     const bookings = getBookings();
@@ -74,4 +52,3 @@ window.onload = async () => {
             }
         });
     });
-};

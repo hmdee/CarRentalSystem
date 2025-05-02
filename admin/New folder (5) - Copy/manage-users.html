@@ -61,7 +61,7 @@
             <!-- Main Content -->
             <main class="col-md-9 col-lg-10 main-content">
                 <button class="btn btn-primary d-md-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
-                    <i class="bi bi-list"></i> 
+                    <i class="bi bi-list"></i> Toggle Sidebar
                 </button>
 
                 <div class="card mb-4">
@@ -75,9 +75,11 @@
                         <!-- Search and Filter -->
                         <div class="mb-3 d-flex justify-content-between">
                             <div>
-                                <input type="text" id="search-users" class="search form-control d-inline-block" style="width: 200px;" placeholder="Search cars...">
+                                <input type="text" id="search-users" class="search form-control d-inline-block" style="width: 200px;" placeholder="Search users...">
                                 <div class="form-check d-inline-block ms-3">
-                                    </div>
+                                    <input type="checkbox" id="filter-available" class="form-check-input">
+                                    <label for="filter-available" class="form-check-label">Show Available Only</label>
+                                </div>
                             </div>
                         </div>
 
@@ -147,6 +149,5 @@
     <script type="module" src="../js/manage-users.js"></script>
     <script src="../js/theme-toggle.js"></script>
     <script src="../js/active.js"></script>
-    
 </body>
 </html>
