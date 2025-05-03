@@ -18,50 +18,7 @@
 <body>
 
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg shadow fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="index.html">Drivee.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-lg-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#featuredVehicles">Featured vehicles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="carsListings.html">Cars</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#offers">Offers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#categories">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                </ul>
-
-                <div id="authArea" class="d-flex align-items-center gap-2">
-                    <button class="btn btn-sm fw-bold" id="loginBtn">Log in</button>
-                    <button class="btn btn-sm fw-bold custom-btn" id="signupBtn">Sign Up</button>
-
-                    <div id="userIcon" class="d-none">
-                        <img src="imgs/person-circle.svg" alt="User" width="32" height="32" class="rounded-circle">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </nav>
+    <nav id="mainNav"></nav>
 
     <!-- Theme Toggle Button -->
     <div id="themeToggle">
@@ -380,5 +337,6 @@
     <!-- Bootstrap CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="./js/homeScript.js"></script>
+    <script type="module" src="NavBar/navBar.js"></script>
 </body>
 </html>

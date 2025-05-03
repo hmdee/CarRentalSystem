@@ -28,7 +28,7 @@ export function getBookings() {
  * @returns {string|null} Error message if validation fails, null otherwise.
  */
 function validateBooking(booking) {
-    const validStatuses = ["pending", "confirmed", "cancelled"];
+    const validStatuses = ["Pending", "Confirmed", "Cancelled"];
     
     const requiredFields = ["id", "carId", "date", "returnDate", "status", "userId"];
     for (const field of requiredFields) {
@@ -51,7 +51,7 @@ function validateBooking(booking) {
  * @returns {Object} Result object with error message if any.
  */
 export function updateBookingStatus(bookingId, newStatus) {
-    const validStatuses = ["pending", "confirmed", "cancelled"];
+    const validStatuses = ["Pending", "Confirmed", "Cancelled"];
     if (!validStatuses.includes(newStatus)) {
         return { error: `Invalid status: ${newStatus}. Must be one of ${validStatuses.join(", ")}` };
     }
@@ -59,7 +59,11 @@ export function updateBookingStatus(bookingId, newStatus) {
     const bookings = getBookings();
     if (bookings.error) return bookings;
 
-    const bookingIndex = bookings.findIndex(booking => booking.id === bookingId);
+    const bookingIndex = bookings.findIndex(booking => {
+        console.log(booking.id);
+        return booking.id === bookingId;
+    });
+    console.log(bookingIndex);
     if (bookingIndex === -1) {
         return { error: "Booking not found" };
     }
@@ -155,7 +159,7 @@ function validateCar(car) {
         return "Price per day must be a positive number";
     }
 
-    if (typeof car.available !== "string" || !["true", "false"].includes(car.available)) {
+    if (typeof car.available !== "boolean") {
         return "Available must be 'true' or 'false'";
     }
 
@@ -164,9 +168,9 @@ function validateCar(car) {
     }
 
     // Validate image as a Base64 string
-    if (!car.image.startsWith("data:image/")) {
-        return "Image must be a valid Base64 string starting with 'data:image/'";
-    }
+    // if (!car.image.startsWith("data:image/")) {
+    //     return "Image must be a valid Base64 string starting with 'data:image/'";
+    // }
 
     if (car.features && !Array.isArray(car.features)) {
         return "Features must be an array";
@@ -178,14 +182,7 @@ function validateCar(car) {
 
     return null;
 }
-// export default async function importAllCars()
-// {
-//  let res =await fetch('../../cars.json');
-//  let response= await res.json()
-//  localStorage.setItem('cars',JSON.stringify(response))
-//  console.log(response);
-//   return 
-// }
+
 
 /**
  * Adds a new car listing to Local Storage.
@@ -220,7 +217,7 @@ export async function updateCar(carId, updatedCar) {
         return { error: cars.error || "Cannot update car: Existing cars data is not an array" };
     }
 
-    const carIndex = cars.findIndex(car => car.id.toString() === carId.toString());
+    const carIndex = cars.findIndex(car => car.id === carId);
     if (carIndex === -1) {
         return { error: "Car not found" };
     }

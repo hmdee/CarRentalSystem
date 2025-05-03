@@ -1,4 +1,4 @@
-import  { getCars, addCar, updateCar, removeCar } from "../js/modules/storage.js";
+import  { getCars, addCar, updateCar, removeCar, removeUser } from "../../js/modules/storage.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
     const carsTableBody = document.getElementById("cars-table");
@@ -45,12 +45,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         let newTr = document.createElement("tr");
 
         let formattedCar = {
-            image: `<img src="${car.image}" alt="${car.model}" style="max-width: 60px;">`,
+            image: `<img src="${car.image.startsWith('data')?'':'../'}${car.image}" alt="${car.model}" style="max-width: 60px;">`,
             model: car.model,
             year: car.year,
             passengers: car.passengers,
             price_per_day: `$${car.price_per_day}`,
-            available: car.available === 'true' ? 'Yes' : 'No',
+            available: car.available === true ? 'Yes' : 'No',
             transmission: car.transmission,
             fuel_type: car.fuel_type,
             mileage: car.mileage,
@@ -85,12 +85,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             cars = await getCars();
         }
 
-        // إذا البيانات غير صالحة، نحاول استيرادها تلقائيًا مرة واحدة
         if (!Array.isArray(cars)) {
             console.warn("Invalid cars data, trying to re-import...");
             const { importAllCars } = await import("../js/modules/storage.js");
             await importAllCars();
-            cars = await getCars(); // إعادة المحاولة
+            cars = await getCars(); 
 
             if (!Array.isArray(cars)) {
                 showError(cars.error || "Failed to load cars: Data is not an array after re-import.");
@@ -128,7 +127,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         if (showAvailableOnly) {
-            filteredCars = filteredCars.filter(car => car.available === 'true');
+            filteredCars = filteredCars.filter(car => car.available === true);
         }
 
         await renderCars(filteredCars);
@@ -140,13 +139,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     carForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         const formData = new FormData(carForm);
+        let availableValue; 
         const car = {
-            id: carIdInput.value || Date.now().toString(),
+            id: Number(carIdInput.value) || Date.now(),
             model: formData.get("model"),
             year: parseInt(formData.get("year")) || 0,
             passengers: parseInt(formData.get("passengers")) || 0,
             price_per_day: parseFloat(formData.get("price_per_day")) || 0,
-            available: formData.get("available"),
+            available: formData.get("available") === "true" || availableValue === true,
             transmission: formData.get("transmission"),
             fuel_type: formData.get("fuel_type"),
             mileage: parseInt(formData.get("mileage")) || 0,
@@ -193,6 +193,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     document.getElementById("car-passengers").value = car.passengers;
                     document.getElementById("car-price").value = car.price_per_day;
                     document.getElementById("car-available").value = car.available;
+                    console.log(car.available);
                     document.getElementById("car-transmission").value = car.transmission;
                     document.getElementById("car-fuel-type").value = car.fuel_type;
                     document.getElementById("car-mileage").value = car.mileage;

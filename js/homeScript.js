@@ -38,21 +38,27 @@ const rentCarBtn = document.getElementById("rentCarBtn");
 
 if (rentCarBtn) {
     rentCarBtn.addEventListener("click", function () {
-        window.location.href = "carsListings.html";
+        window.location.href = "../carsList/carsListings.html";
     });
 }
 
 // Handle Click When login on signup
 const loginBtn = document.getElementById('loginBtn');
 const signupBtn = document.getElementById('signupBtn');
+if(loginBtn)
+{
+    loginBtn.addEventListener('click', function () {
+        window.location.href = '../Login/Login.html';
+    });
+}
+if(signupBtn)
+{
+    signupBtn.addEventListener('click', function () {
+        window.location.href = '../Register/Register.html';
+    });
+}
 
-loginBtn.addEventListener('click', function () {
-    window.location.href = '../Login/Login.html';
-});
 
-signupBtn.addEventListener('click', function () {
-    window.location.href = '../Register/Register.html';
-});
 
 
 // Handle Slider (Swiper JS Library)

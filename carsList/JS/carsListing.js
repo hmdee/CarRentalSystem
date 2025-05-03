@@ -1,4 +1,4 @@
-import { getCars } from "../js/modules/storage.js";
+import { getCars } from "../../js/modules/storage.js";
 
 let carsContainer = document.getElementById("carsList");
 let originalCars = []; // Store the original cars array for filtering
@@ -27,7 +27,7 @@ function buildCarLists(arr) {
                 carDiv.innerHTML = `
                     <div class="card h-100 shadow-sm cursor-pointer">
                         <figure class="text-center p-3">
-                            <img src="${car.image}" class="card-img-top w-100" alt="${car.model}">
+                            <img src="${car.image.startsWith('data')?'':'../'}${car.image}" class="card-img-top w-100" alt="${car.model}">
                         </figure>
                         <div class="card-body">
                             <h5 class="card-title mb-3 fw-bold">${car.model}</h5>
@@ -51,8 +51,9 @@ function buildCarLists(arr) {
                 carDiv.addEventListener('click', function () {
                     let car_id = this.id;
                     let targettedCar = arr.find(car => car.id === Number(car_id));
+                    console.log(targettedCar)
                     localStorage.setItem('selectedCar', JSON.stringify(targettedCar));
-                    window.location.href = './details.html';
+                    window.location.href = '../../carDetails/details.html';
                 });
             });
         }, 300);
@@ -73,17 +74,55 @@ function applyFilters() {
         return matchesSearch && matchesPrice && matchesAvailability;
     });
 
+    // console.log(filteredCars);
+
     buildCarLists(filteredCars);
 }
 
 // Initialize the page
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Fetch cars from localStorage using getCars
-    const carsData = getCars();
-    
-    // Handle errors from getCars
-    if (carsData.error) {
-        console.error("Error fetching cars:", carsData.error);
+    try {
+        const carsData = await getCars();
+
+        // Handle errors from getCars
+        if (carsData.error) {
+            console.error("Error fetching cars:", carsData.error);
+            if (carsContainer) {
+                carsContainer.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <p class="sorry_msg">Error loading cars. Please try again later.</p>
+                    </div>
+                `;
+            }
+            return;
+        }
+
+        // If no cars are found, display a message
+        if (!carsData || carsData.length === 0) {
+            if (carsContainer) {
+                carsContainer.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <p class="sorry_msg">No cars available at the moment.</p>
+                    </div>
+                `;
+            }
+            return;
+        }
+
+        // Store the cars in originalCars and render them
+        originalCars = carsData;
+        console.log(originalCars);
+        buildCarLists(originalCars);
+
+        // Add event listeners for filters
+        document.getElementById("searchInput")?.addEventListener('input', applyFilters);
+        document.getElementById("minPrice")?.addEventListener('input', applyFilters);
+        document.getElementById("maxPrice")?.addEventListener('input', applyFilters);
+        document.getElementById("availableOnly")?.addEventListener('change', applyFilters);
+        
+    } catch (error) {
+        console.error("Unexpected error:", error);
         if (carsContainer) {
             carsContainer.innerHTML = `
                 <div class="col-12 text-center py-5">
@@ -91,28 +130,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
         }
-        return;
     }
-
-    // If no cars are found, display a message
-    if (!carsData || carsData.length === 0) {
-        if (carsContainer) {
-            carsContainer.innerHTML = `
-                <div class="col-12 text-center py-5">
-                    <p class="sorry_msg">No cars available at the moment.</p>
-                </div>
-            `;
-        }
-        return;
-    }
-
-    // Store the cars in originalCars and render them
-    originalCars = carsData;
-    buildCarLists(originalCars);
-
-    // Add event listeners for filters
-    document.getElementById("searchInput")?.addEventListener('input', applyFilters);
-    document.getElementById("minPrice")?.addEventListener('input', applyFilters);
-    document.getElementById("maxPrice")?.addEventListener('input', applyFilters);
-    document.getElementById("availableOnly")?.addEventListener('change', applyFilters);
 });

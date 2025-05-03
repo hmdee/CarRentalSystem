@@ -21,31 +21,31 @@ const navContainer = document.getElementById("mainNav");
           <div class="collapse text-center navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-lg-auto">
               <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="../index.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="index.html#about">About Us</a>
+                <a class="nav-link" href="../index.html#about">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="index.html#featuredVehicles">Featured vehicles</a>
+                <a class="nav-link" href="../index.html#featuredVehicles">Featured vehicles</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="index.html#offers">Offers</a>
+                <a class="nav-link" href="../index.html#offers">Offers</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="carsListings.html">Cars</a>
+                <a class="nav-link" href="../carsList/carsListings.html">Cars</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="index.html#categories">Categories</a>
+                <a class="nav-link" href="../index.html#categories">Categories</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
+                <a class="nav-link" href="../support/support.html">Support</a>
               </li>
             </ul>
   
              <div id="authArea" class="d-flex align-items-center gap-2">
-            <button class="btn btn-sm" id="loginBtn" onclick="window.location.href='login.html'">Log in</button>
-            <button class="btn btn-sm custom-btn" id="signupBtn" onclick="window.location.href='signup.html'">Sign Up</button>
+            <button class="btn btn-sm" id="loginBtn" onclick="window.location.href='../Login/Login.html'">Log in</button>
+            <button class="btn btn-sm custom-btn" id="signupBtn" onclick="window.location.href='../Register/Register.html'">Sign Up</button>
             <div id="userArea" class="d-none  w-100 dropdown">
               <img
                 id="userIcon"
@@ -59,7 +59,7 @@ const navContainer = document.getElementById("mainNav");
                 style="cursor: pointer;"
               />
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="userProfile.html" id="profileLink">User profile</a></li>
+                <li><a class="dropdown-item" href="../editProfile/edit-profile.html" id="profileLink">User profile</a></li>
                 <li><a class="dropdown-item" href="#" id="logoutLink">Log out</a></li>
               </ul>
             </div>

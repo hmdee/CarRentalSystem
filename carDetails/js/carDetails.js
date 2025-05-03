@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="row g-5 mr-0">
             <!-- Left side (car image) -->
             <div class="col-md-6">
-                <img src="${carData.image}" class="img-fluid rounded" alt="${carData.model}">
+                <img src="${carData.image.startsWith('data')?'':'../'}${carData.image}" class="img-fluid rounded" alt="${carData.model}">
 
             </div>
             <!-- Right side: (Car info and booking link) -->
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <h4 class='fw-bold'>${carData.available ? 'Available' : 'Not Available'}</h4>
                     <p class='price'>$${carData.price_per_day} <span>/Per Day</span></p>
                 </div>
-                <a ${carData.available ? 'href="../Booking/booking.html"' : ''} class="btn fw-bold book-btn custom-btn mt-3 w-full d-block ${carData.available ? 'pe-auto' : 'pe-none opacity-50'}">Book Now</a>
+                <a ${carData.available ? 'href="../../Booking/booking.html"' : ''} class="btn fw-bold book-btn custom-btn mt-3 w-full d-block ${carData.available ? 'pe-auto' : 'pe-none opacity-50'}">Book Now</a>
             </div>
         </div>
     `;

@@ -45,7 +45,13 @@ body {
     font-size: 32px;
     color: var(--main-text);
 }
-
+.user-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
 .sidebar {
     height: calc(100vh - var(--navbar-height));
     border-right: 1px solid var(--border-color);
@@ -119,7 +125,14 @@ body {
     padding: 8px;
     color: #1D1D1F;
 }
-
+.users-data td
+{
+    color: var(--main-text) ; 
+}
+.msg-support
+{
+    color: #1D1D1F !important;
+}
 .table img {
     max-width: 40px;
     height: auto;
@@ -199,7 +212,10 @@ button, .btn {
     background-color: var(--border-color);
 }
 
-
+#search-users::placeholder
+{
+    color: var(--main-text);
+}
 #themeToggle {
     position: fixed;
     top: 50%;
@@ -282,7 +298,6 @@ button, .btn {
     }
 }
 
-/* العناوين */
 h1 {
     font-size: 32px;
     font-weight: 600;
