@@ -1,3 +1,13 @@
+const userName = document.getElementById("userName");
+const userImage = document.getElementById("userImage");
+
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+if (!currentUser) {
+    window.location.href = "../../index.html";
+}
+
+
 const STORAGE_KEY_BOOKINGS = 'bookings';
 
 const getBookings = () => {
@@ -11,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Bookings Per Month (Text)
     const bookingsPerMonthList = document.getElementById('bookings-per-month');
     const byMonth = bookings.reduce((acc, b) => {
-        const month = new Date(b.date).toLocaleString('default', { month: 'short', year: 'numeric' });
+        const month = new Date(b.pickupDate).toLocaleString('default', { month: 'short', year: 'numeric' });
         acc[month] = (acc[month] || 0) + 1;
         return acc;
     }, {});
@@ -26,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Peak Hours (Text)
     const peakHoursList = document.getElementById('peak-hours');
     const byHour = bookings.reduce((acc, b) => {
-        const hour = new Date(b.date).getHours();
+        const hour = new Date(b.pickupDate).getHours();
         acc[hour] = (acc[hour] || 0) + 1;
         return acc;
     }, {});
@@ -36,6 +46,22 @@ document.addEventListener('DOMContentLoaded', () => {
         li.className = 'list-group-item';
         li.textContent = `${hour}:00 - ${count}`;
         peakHoursList.appendChild(li);
+    });
+
+    // Revenue Per Month (Text)
+    const revenuePerMonthList = document.getElementById('revenue-per-month');
+    const revenueByMonth = bookings.reduce((acc, b) => {
+        if (b.status.toLowerCase() !== 'confirmed') return acc; // Only confirmed bookings
+        const month = new Date(b.pickupDate).toLocaleString('default', { month: 'short', year: 'numeric' });
+        acc[month] = (acc[month] || 0) + (b.totalPrice || 0);
+        return acc;
+    }, {});
+    revenuePerMonthList.innerHTML = '';
+    Object.entries(revenueByMonth).forEach(([month, revenue]) => {
+        const li = document.createElement('li');
+        li.className = 'list-group-item';
+        li.textContent = `${month}: $${revenue.toFixed(2)}`;
+        revenuePerMonthList.appendChild(li);
     });
 
     // Bookings Per Month Chart
@@ -106,6 +132,42 @@ document.addEventListener('DOMContentLoaded', () => {
             plugins: {
                 legend: {
                     labels: { color: '#FF6B00' }
+                }
+            }
+        }
+    });
+
+    // Revenue Per Month Chart
+    const revenuePerMonthCtx = document.getElementById('revenuePerMonthChart').getContext('2d');
+    new Chart(revenuePerMonthCtx, {
+        type: 'bar',
+        data: {
+            labels: Object.keys(revenueByMonth),
+            datasets: [{
+                label: 'Revenue Per Month',
+                data: Object.values(revenueByMonth),
+                backgroundColor: '#28A745',
+                borderColor: '#28A745',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: '#28A745' },
+                    grid: { color: '#3A3A3C' }
+                },
+                x: {
+                    ticks: { color: '#28A745' },
+                    grid: { color: '#3A3A3C' }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { color: '#28A745' }
                 }
             }
         }

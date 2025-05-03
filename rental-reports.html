@@ -54,7 +54,6 @@
                 </ul>
             </nav>
 
-
             <!-- Main Content -->
             <main class="col-md-9 col-lg-10 main-content">
                 <button class="btn btn-primary d-md-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
@@ -65,30 +64,38 @@
 
                 <!-- Text Reports -->
                 <div class="row mb-5">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <h4>Bookings Per Month</h4>
                         <ul id="bookings-per-month" class="list-group"></ul>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <h4>Peak Hours</h4>
                         <ul id="peak-hours" class="list-group"></ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Revenue Per Month</h4>
+                        <ul id="revenue-per-month" class="list-group"></ul>
                     </div>
                 </div>
 
                 <!-- Chart Reports -->
-            <!-- Chart Reports -->
-            <div class="row">
-                <!-- Bookings Per Month Chart -->
-                <div class="col-md-6 mb-4">
-                    <h4>Bookings Per Month (Chart)</h4>
-                    <canvas id="bookingsPerMonthChart" style="max-height: 300px;"></canvas>
+                <div class="row">
+                    <!-- Bookings Per Month Chart -->
+                    <div class="col-md-4 mb-4">
+                        <h4>Bookings Per Month (Chart)</h4>
+                        <canvas id="bookingsPerMonthChart" style="max-height: 300px;"></canvas>
+                    </div>
+                    <!-- Peak Hours Chart -->
+                    <div class="col-md-4 mb-4">
+                        <h4>Peak Hours (Chart)</h4>
+                        <canvas id="peakHoursChart" style="max-height: 300px;"></canvas>
+                    </div>
+                    <!-- Revenue Per Month Chart -->
+                    <div class="col-md-4 mb-4">
+                        <h4>Revenue Per Month (Chart)</h4>
+                        <canvas id="revenuePerMonthChart" style="max-height: 300px;"></canvas>
+                    </div>
                 </div>
-                <!-- Peak Hours Chart -->
-                <div class="col-md-6 mb-4">
-                    <h4>Peak Hours (Chart)</h4>
-                    <canvas id="peakHoursChart" style="max-height: 300px;"></canvas>
-                </div>
-            </div>
             </main>
         </div>
     </div>
