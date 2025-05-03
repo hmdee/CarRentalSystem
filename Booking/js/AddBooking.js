@@ -1,5 +1,7 @@
 const user = JSON.parse(localStorage.getItem("currentUser"));
 const selectedCar = JSON.parse(localStorage.getItem("selectedCar"));
+
+
 export default function addBooking(
   pickupDate,
   dropOffDate,
