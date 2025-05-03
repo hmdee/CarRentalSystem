@@ -18,7 +18,16 @@ const toggleBtn = document.getElementById("themeToggle");
 
 if(!user)
 {
-  document.getElementById('bookingRow').innerHTML=`<h1 class="text-center text-danger py-5">Please Log In to continue booking </h1>`
+  document.getElementById('bookingRow').innerHTML = `
+  <div class="d-flex logInAlert flex-column align-items-center justify-content-center py-5 bg-light rounded shadow-sm">
+    <i class="bi bi-exclamation-triangle-fill text-danger display-4 mb-3"></i>
+    <h2 class="text-danger text-center mb-3">Login Required</h2>
+    <p class="text-muted text-center mb-4">Please log in to continue with your booking process.</p>
+    <a href="../../Login/Login.html" class="btn btn-outline-primary px-4 py-2 rounded-pill">
+      <i class="bi bi-box-arrow-in-right me-2"></i>Go to Login
+    </a>
+  </div>
+`;
 }
 else if(!selectedCar)
 {

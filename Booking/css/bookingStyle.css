@@ -147,19 +147,7 @@ label i {
   color: var(--color-header-bg);
 }
 
-/* Optional: Alerts / Badges */
-.alert {
-  padding: 15px;
-  border-radius: 6px;
-  background-color: #ffc107;
-  color: #333;
-  margin-bottom: 1rem;
-}
 
-.dark-mode .alert {
-  background-color: #5a4500;
-  color: #f1f1f1;
-}
 
 .modal-content {
   background-color: var(--main-bg-color);
@@ -172,4 +160,22 @@ label i {
   background: var(--btn-color);
   color: var(--input-bg);
   border: var(--btn-color);
+}
+.logInAlert{
+  background-color: var(--main-bg-color) !important;
+}
+.logInAlert p
+{
+  color: var( --text-main) !important;
+}
+.logInAlert a
+{  transition: all 0.3s;
+  background: var(--btn-color);
+  color: var(--input-bg);
+  border: solid 1px var(--btn-color);
+}
+.logInAlert a:hover{
+  background-color: var(--color-header-bg);
+  color: var(--color-text-main);
+  border: solid 1px var(--color-text-main);
 }
