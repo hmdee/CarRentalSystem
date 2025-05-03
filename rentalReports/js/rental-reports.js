@@ -1,12 +1,17 @@
+import adminLogOut from "../../LogOut/AdminLogOut.js";
+
 const userName = document.getElementById("userName");
 const userImage = document.getElementById("userImage");
 
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+const admin = localStorage.getItem("admin");
+if (!admin) {
+    window.location.href = "../../index.html";
+}
 
-// if (!currentUser) {
-//     window.location.href = "../../index.html";
-// }
-
+document.getElementById('adminLogout').addEventListener('click',()=>{
+    adminLogOut()
+})
 
 const STORAGE_KEY_BOOKINGS = 'bookings';
 

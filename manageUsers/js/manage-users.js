@@ -1,3 +1,5 @@
+import adminLogOut from "../../LogOut/AdminLogOut.js";
+
 const usersTableBody = document.getElementById('users-table');
 const userErrorDiv = document.getElementById('user-error');
 const searchInput = document.getElementById('search-users');
@@ -6,21 +8,25 @@ const userImage = document.getElementById("userImage");
 const messagesBody = document.getElementById("messagesBody");
 
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+const admin = localStorage.getItem("admin");
 
-// if (!currentUser) {
-//     window.location.href = "../../index.html";
-// }
-
-// Update Navbar with user info
-if (currentUser) {
-    userName.textContent = currentUser.name || "Admin";
-    if (userImage) {
-        userImage.src = currentUser.profileImage || "https://via.placeholder.com/30";
-        userImage.onerror = function() {
-            this.src = "https://via.placeholder.com/30";
-        };
-    }
+if (!admin) {
+    window.location.href = "../../index.html";
 }
+
+document.getElementById('adminLogout').addEventListener('click',()=>{
+    adminLogOut()
+})
+// Update Navbar with user info
+// if (currentUser) {
+//     userName.textContent = currentUser.name || "Admin";
+//     if (userImage) {
+//         userImage.src = currentUser.profileImage || "https://via.placeholder.com/30";
+//         userImage.onerror = function() {
+//             this.src = "https://via.placeholder.com/30";
+//         };
+//     }
+// }
 
 const showError = (message) => {
     if (!userErrorDiv) {
@@ -294,3 +300,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+

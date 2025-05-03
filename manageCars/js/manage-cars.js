@@ -1,4 +1,5 @@
 import  { getCars, addCar, updateCar, removeCar, removeUser } from "../../js/modules/storage.js";
+import adminLogOut from "../../LogOut/AdminLogOut.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
     const carsTableBody = document.getElementById("cars-table");
@@ -11,7 +12,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     const submitCarBtn = document.getElementById("submit-car-btn");
     const carModal = new bootstrap.Modal(document.getElementById("carModal"));
     const openCarModalBtn = document.getElementById("open-car-modal");
+    const admin = localStorage.getItem("admin");
 
+if (!admin) {
+    window.location.href = "../../index.html";
+}
+
+document.getElementById('adminLogout').addEventListener('click',()=>{
+    adminLogOut()
+})
 
     const showError = (message) => {
         carErrorDiv.innerHTML = `${message}`;

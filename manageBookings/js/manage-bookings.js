@@ -4,7 +4,16 @@ import {
     getCars,
     updateCar
 } from "../../js/modules/storage.js";
- 
+import adminLogOut from "../../LogOut/AdminLogOut.js";
+const admin = localStorage.getItem("admin");
+if (!admin) {
+    window.location.href = "../../index.html";
+}
+
+document.getElementById('adminLogout').addEventListener('click',()=>{
+    adminLogOut()
+}) 
+
 const init = async () => {
     let bookings = getBookings(); // Sync
     let cars = await getCars();   // Async

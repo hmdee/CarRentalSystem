@@ -2,6 +2,7 @@ const loginError = document.getElementById("loginError");
 export default function logIn(userEmail, userPassword) {
   let users = JSON.parse(localStorage.getItem("usersList")) || [];
   if (userEmail.value === "admin" && userPassword.value === "admin") {
+    localStorage.setItem('admin','admin')
     window.open("../../manageCars/manage-cars.html",'_self');
     return;
   }

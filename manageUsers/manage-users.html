@@ -14,11 +14,11 @@
     <nav class="navbar navbar-expand-lg shadow fixed-top">
         <div class="container-fluid">
             <div class="d-flex align-items-center">
-                <img id="userImage" src="https://via.placeholder.com/30" alt="User Image" class="user-image">
+                <!-- <img id="userImage" src="https://via.placeholder.com/30" alt="User Image" class="user-image"> -->
                 <span id="userName" class="navbar-brand mb-0">Admin</span>
             </div>
             <div class="ms-auto">
-                <button class="btn btn-outline-secondary btn-signout">Sign Out</button>
+                <button id="adminLogout" class="btn btn-outline-secondary btn-signout">Sign Out</button>
             </div>
         </div>
     </nav>
@@ -50,9 +50,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link btn-signout">
-                            <i class="bi bi-box-arrow-right"></i> Sign Out
+                        <a href="../manageBookings/manage-bookings.html" class="nav-link" data-target="bookings">
+                            <i class="bi bi-calendar-check"></i> Manage Bookings
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../carsList/carsListings.html" target="_blank" class="nav-link">
+                            <i class="bi bi-car-front-fill"></i> Cars List
+                          </a>
                     </li>
                 </ul>
             </nav>
