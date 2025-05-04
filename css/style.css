@@ -1,0 +1,328 @@
+:root {
+    --font-primary: 'Poppins', sans-serif;
+    --font-h1: 32px;
+    --font-h2: 24px; 
+    --font-body: 16px;
+    --font-small: 14px;
+}
+* {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body.dark-mode {
+    --color-background: #1D1D1F;
+    --color-card-bg: #2C2C2E;
+    --color-text-main: #FFFFFF;
+    --color-text-secondary: #B3B3B3;
+    --color-border: #3A3A3C;
+    --color-background-about: #2C2C2E;
+    --color-header-bg: #1D1D1F;
+    --color-footer-bg: #2C2C2E;
+}
+body.light-mode {
+    --color-background: #FFFFFF;
+    --color-card-bg: #F5F5F7;
+    --color-text-main: #1D1D1F;
+    --color-text-secondary: #6E6E73;
+    --color-border: #E5E5EA;
+    --color-header-bg: #FFFFFF;
+    --color-footer-bg: #F5F5F7;
+    --color-background-about: #F5F5F7;
+}
+body {
+    font-family: var(--font-primary);
+    transition: 0.3s;
+}
+/* Custom Button */
+.custom-btn {
+    background-color: var(--color-text-main);
+    color: var(--color-header-bg);
+    border: 1px solid var(--color-header-bg);
+    transition: 0.3s;
+}
+.custom-btn:hover {
+    background-color: var(--color-header-bg);
+    color: var(--color-text-main);
+    border: 1px solid var(--color-text-main);
+}
+/* Toggle Theme */
+
+#themeToggle {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: var(--color-text-main);
+    border-radius: 0 8px 8px 0;
+    padding: 10px;
+    box-shadow: 0 0 5px var(--color-text-main);
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 999;
+}
+#themeToggle i {
+    color: var(--color-header-bg);
+}
+/* End theme */
+/* Header */
+.navbar {
+    background-color: var(--color-header-bg) !important;
+    color: var(--color-text-main) !important;
+}
+.navbar-brand {
+    color: var(--color-text-main) !important;
+    font-size: var(--font-h1);
+}
+.navbar-nav a {
+    color: var(--color-text-main) !important;
+    transition: 0.3s;
+}
+.navbar-nav a:hover {
+    transform: translateY(-1px);
+    text-decoration: underline;
+}
+#authArea button {
+    padding: 8px 16px;
+    font-size: var(--font-small);
+    transition: 0.3s;
+}
+#loginBtn {
+    background-color: transparent;
+    color: var(--color-text-main);
+    border: 1px solid var(--color-text-main);
+}
+#loginBtn:hover {
+    background-color: var(--color-text-main);
+    color: var(--color-header-bg);
+}
+/* End header */
+
+/* Home Section */
+.landing-page {
+    background-color: var(--color-background);
+    color: var(--color-text-main);
+    padding: 60px 0 0 0;
+}
+.left-info h1 {
+    font-size: 45px;
+}
+.left-info p {
+    font-size: var(--font-body);
+    margin: 15px 0;
+    line-height: 1.8;
+}
+.left-info button {
+    padding: 15px 30px;
+    font-size: var(--font-body);
+}
+/* About Us Section */
+.about-section {
+    background-color: var(--color-background-about);
+    padding: 100px 0;
+}
+.about-section h2 {
+    font-size: var(--font-h1);
+    margin-bottom: 20px;
+    color: var(--color-text-main);
+}
+.about-section p {
+    font-size: var(--font-body);
+    color: var(--color-text-main);
+    margin-bottom: 30px;
+    line-height: 1.9;
+}
+.about-section .btn {
+    padding: 15px 30px;
+}
+.about-section figure {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.about-section img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+/* End About */
+
+/* Featured Vehicles */
+.featured-vehicles {
+    background-color: var(--color-border);
+    padding: 60px 0;
+}
+.card {
+    background-color: var(--color-background);
+}
+.featured-vehicles h2 {
+    font-size: var(--font-h1);
+    color: var(--color-text-main);
+}
+.featured-vehicles .card figure {
+    max-height: 200px;
+}
+.featured-vehicles .card figure img {
+    object-fit: cover;
+}
+.card-body a.btn {
+    padding: 10px 20px;
+    font-size: var(--font-body);
+    margin-top: 10px;
+}
+.card-body h5 {
+    color: var(--color-text-main);
+}
+.card-body small {
+    color: var(--color-text-main);
+}
+.card-body .row p {
+    font-size: var(--font-small);
+    color: var(--color-text-secondary);
+}
+/* End of featured Vehicles */
+
+/* Offers */
+.offers {
+    background-color: var(--color-background);
+}
+.offers h2 {
+    color: var(--color-text-main);
+}
+.offer-card {
+    background: linear-gradient(135deg, var(--color-border) 0%, var(--color-card-bg) 100%);
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    min-height: 400px;
+}
+.offer-card .card-body h3 {
+    color: var(--color-text-main) !important;
+}
+.offer-card img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+}
+.offer-card .card-title {
+    font-size: var(--font-h2);
+}
+.offer-card .text-muted {
+    font-size: var(--font-body);
+    color: var(--color-text-secondary) !important;
+}
+.offer-card .btn-outline-light {
+    font-size: var(--font-primary);
+}
+/* End Offers */
+/* Start Slider */
+.slider {
+    background-color: var(--color-border);
+}
+/* End Slider */
+
+/* Start Footer */
+footer {
+    background-color: var(--color-footer-bg);
+    color: var(--color-text-main);
+    padding: 60px 0;
+}
+footer h5.logo {
+    color: var(--color-text-main) !important;
+    font-size: var(--font-h1);
+    font-weight: bold;
+}
+footer .para {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 20px 0;
+}
+footer h5.title {
+    color: var(--color-text-main) !important;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+footer ul {
+    margin: 0;
+}
+footer ul li {
+    margin-bottom: 0.5rem;
+}
+footer ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+footer ul li a:hover {
+    text-decoration: underline;
+}
+footer ul.links li a,
+footer ul.cities li {
+    color: var(--color-text-secondary) !important;
+}
+.social-icons a i {
+    color: var(--color-text-main);
+    margin-right: 25px;
+    font-size: 22px;
+    transition: 0.3s;
+}
+.social-icons a:hover i {
+    color: #adb5bd;
+}
+/* End Footer */
+
+/* Tablet */
+@media (max-width: 991px) {
+    #authArea {
+        padding-bottom: 10px;
+    }
+    .navbar-toggler {
+        background-color: #FFFFFF;
+        border-radius: 8px;
+        padding: 5px 10px;
+    }
+    .landing-page {
+        padding: 60px 0;
+    }
+    .left-info h1 {
+        font-size: 35px;
+    }
+    .about-section h1 {
+        font-size: 28px;
+    }
+    .about-section p {
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+}
+
+/* Phones */
+@media (max-width: 768px) {
+    .left-info h1 {
+        font-size: 30px;
+    }
+    .left-info p {
+        font-size: var(--font-small);
+    }
+    .left-info button {
+        margin-top: 12px;
+    }
+    .landing-page {
+        padding: 120px 0 0 0;
+    }
+    .about-section {
+        padding: 50px 0;
+    }
+    .offer-card .card-body h3 {
+        font-size: 20px;
+    }
+    .offer-card .text-muted {
+        font-size: var(--font-small);
+    }
+    .card-body a.btn {
+        font-size: var(--font-small);
+    }
+    footer .row > div {
+        margin-bottom: 30px;
+    }
+}

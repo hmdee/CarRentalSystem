@@ -1,0 +1,184 @@
+:root {
+  --font-primary: "Poppins", sans-serif;
+  --font-h1: 32px;
+  --font-h2: 24px;
+  --font-body: 16px;
+  --font-small: 14px;
+
+  --bg-color: #fff;
+  --main-bg-color: #f6f5f1;
+  --input-bg: #fff;
+  --text-main: #000;
+  --btn-color: #000;
+  --color-header-bg: #f6f5f1;
+  --color-text-main: #000;
+}
+
+body.dark-mode {
+  --bg-color: #121212;
+  --main-bg-color: #1e1e1e;
+  --input-bg: #1c1c1c;
+  --text-main: #ffffff;
+  --btn-color: #ffffff;
+  --color-header-bg: #2a2a2a;
+  --color-text-main: #ffffff;
+}
+.py-6 {
+  padding: 95px 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: var(--font-primary);
+  color: var(--text-main);
+}
+.image-container {
+  background-color: var(--main-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.booking-card {
+  background: var(--main-bg-color);
+  border-radius: 16px;
+  padding: 32px 24px;
+  box-shadow: 0 2px 12px #0001;
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-main);
+}
+
+/* Form Labels */
+label {
+  color: var(--text-main);
+  display: block;
+  margin-bottom: 6px;
+  font-size: var(--font-small);
+}
+
+label i {
+  margin-right: 6px;
+  color: var(--text-main);
+}
+
+/* Inputs */
+.booking-input {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1.5px solid #e0e0dc;
+  background: var(--input-bg);
+  font-size: var(--font-body);
+  color: var(--text-main);
+}
+
+.booking-input::placeholder {
+  color: #999;
+}
+
+.dark-mode .booking-input::placeholder {
+  color: #aaa;
+}
+
+/* Price box */
+.price-box {
+  background: var(--input-bg);
+  padding: 10px 18px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px #0001;
+  font-weight: 600;
+  font-size: 18px;
+  min-height: 40px;
+  color: var(--text-main);
+}
+
+/* Button */
+.book-btn {
+  width: 100%;
+  padding: 18px;
+  background: var(--btn-color);
+  color: var(--input-bg);
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  transition: all 0.3s;
+}
+
+.book-btn:hover {
+  background-color: var(--color-header-bg);
+  color: var(--color-text-main);
+  border: solid 1px var(--color-text-main);
+}
+
+/* Toggle */
+#themeToggle {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background-color: var(--color-text-main);
+  border-radius: 0 8px 8px 0;
+  padding: 10px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 999;
+}
+
+#themeToggle i {
+  color: var(--color-header-bg);
+}
+
+.modal-content {
+  background-color: var(--main-bg-color);
+  color: var(--text-main);
+  border-radius: 10px;
+  padding: 20px;
+}
+#gotohomeBtn {
+  background: var(--btn-color);
+  color: var(--input-bg);
+  border: var(--btn-color);
+}
+.logInAlert {
+  background-color: var(--main-bg-color) !important;
+}
+.logInAlert p {
+  color: var(--text-main) !important;
+}
+.logInAlert a {
+  transition: all 0.3s;
+  background: var(--btn-color);
+  color: var(--input-bg);
+  border: solid 1px var(--btn-color);
+}
+.logInAlert a:hover {
+  background-color: var(--color-header-bg);
+  color: var(--color-text-main);
+  border: solid 1px var(--color-text-main);
+}
+
+/* .disabled-btn{
+  background-color: #2a2a2a;
+} */

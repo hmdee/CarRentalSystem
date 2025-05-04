@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking</title>
+  </head>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Bootstrap Icons CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  />
+  <!-- Bootstrap CDN -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+    crossorigin="anonymous"
+  />
+  <!-- Main CSS File -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="css/bookingStyle.css" />
+
+  <body class="">
+    <nav id="mainNav"></nav>
+    <div id="themeToggle">
+      <i class="bi bi-brightness-high" id="themeIcon"></i>
+    </div>
+    <main>
+      <div class="container">
+        <div id="bookingRow" class="row py-6 g-5">
+          <div id="rightColDiv" class="col-lg-6">
+            <!-- car image will be here -->
+          </div>
+          <div class="col-lg-5">
+            <div class="booking-card h-100">
+              <h1 class="text-center mb-3">Book Your car</h1>
+              <div class="mb-3">
+                <label class="mb-1 d-block">
+                  <i class="bi bi-calendar"></i> Pick-Up
+                </label>
+                <div class="d-flex gap-2">
+                  <input
+                    id="pickUpDate"
+                    type="date"
+                    class="booking-input"
+                    placeholder="DD/MM/YYYY"
+                  />
+                  <input
+                    id="pickUpTime"
+                    type="time"
+                    class="booking-input"
+                    placeholder="12.30 PM"
+                  />
+                </div>
+              </div>
+              <div
+                id="pickUpDateError"
+                class="text-danger mt-3 text-center"
+              ></div>
+              <div class="mb-3">
+                <label class="mb-1 d-block">
+                  <i class="bi bi-calendar"></i> Drop-Off
+                </label>
+                <div class="d-flex gap-2">
+                  <input
+                    id="DropOffDate"
+                    type="date"
+                    class="booking-input"
+                    placeholder="DD/MM/YYYY"
+                  />
+                  <input
+                    id="dropOffTime"
+                    type="time"
+                    class="booking-input"
+                    placeholder="12.30 PM"
+                  />
+                </div>
+              </div>
+              <div
+                id="DropOffDateError"
+                class="text-danger mt-3 text-center"
+              ></div>
+              <div
+                class="d-flex justify-content-between align-items-center mb-3"
+              >
+                <div>
+                  <div class="fw-bold">Duration</div>
+                  <div id="totalDuration" class="duration"></div>
+                </div>
+                <div id="price" class="price-box"></div>
+              </div>
+
+              <button id="bookBtn" type="submit" class="book-btn">
+                BOOK NOW
+              </button>
+              <div id="bookingError" class="text-danger mt-3 text-center"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Booking Confirmation Modal -->
+      <div
+        class="modal fade"
+        id="bookingModal"
+        tabindex="-1"
+        aria-labelledby="bookingModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="bookingModalLabel">
+                Booking Bending
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body" id="bookingModalBody">
+              <!-- Booking summary will be injected here -->
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                id="gotohomeBtn"
+                onclick="window.open('../index.html','_self')"
+                type="button"
+                class="btn btn-primary"
+              >
+                Go to Home
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer id="footer"></footer>
+    <!-- Bootstrap CDN -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Flatpickr JS -->
+    <script type="module" src="js/bookingMain.js"></script>
+    <script type="module" src="../NavBar/navBar.js"></script>
+    <script src="../Footer/Footer.js"></script>
+  </body>
+</html>

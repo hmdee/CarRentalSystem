@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap Icons CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <!-- Bootstrap CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <!-- Swiper js CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Home Page</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <nav id="mainNav"></nav>
+
+    <!-- Theme Toggle Button -->
+    <div id="themeToggle">
+      <i class="bi bi-brightness-high" id="themeIcon"></i>
+    </div>
+
+    <!-- Landing Page -->
+    <section class="landing-page" id="home">
+      <section
+        class="container d-flex justify-content-between align-items-center gap-4 flex-column flex-md-row"
+      >
+        <article class="left-info col-12 col-md-6">
+          <h1 class="fw-bold">Unlock Endless Driving With Drivee</h1>
+          <p>
+            To contribute to positive change and achieve our sustainability
+            goals with many extraordinary
+          </p>
+          <button class="btn custom-btn fw-bold" id="rentCarBtn">
+            Rent Car
+          </button>
+        </article>
+
+        <figure
+          class="col-12 col-md-6 d-flex justify-content-center align-items-center"
+        >
+          <img
+            src="./imgs/bmwLandingImg.webp"
+            alt="BMW Car Image"
+            class="car-img"
+            width="100%"
+          />
+        </figure>
+      </section>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="row align-items-center gap-md-0 gap-5">
+          <div class="col-md-6">
+            <h2 class="fw-bold">About Us📖</h2>
+            <p>
+              We are a dedicated team behind a seamless car rental system
+              designed to make your travel effortless. Our mission is to provide
+              you with a hassle-free experience, offering a wide range of
+              vehicles to suit your needs. Whether you're planning a quick
+              getaway or a long road trip, we’ve got you covered with our
+              easy-to-use platform. Rent a car, hit the road, and explore with
+              confidence!
+            </p>
+            <a href="#" class="btn fw-bold custom-btn">Learn More</a>
+          </div>
+
+          <figure class="col-md-6">
+            <img
+              src="./imgs/aboutUs.jpg"
+              alt="Car Rental Image"
+              class="img-fluid"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Vehicles Section -->
+    <section class="featured-vehicles py-5" id="featuredVehicles">
+      <div class="container">
+        <h2 class="text-center mb-5 fw-bold">Featured Vehicles🥇</h2>
+        <div class="row g-4">
+          <!-- Card 1 -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm p-3">
+              <figure class="text-center p-3">
+                <img
+                  src="./imgs/Toyota-Hilux-Transparent-PNG.png"
+                  class="card-img-top w-100"
+                  alt="Toyota Hilux"
+                />
+              </figure>
+              <div class="card-body">
+                <h5 class="card-title mb-3 fw-bold">Toyota Hilux</h5>
+                <div class="row text-muted mb-3">
+                  <p class="col-6 mb-2">Year: 2020</p>
+                  <p class="col-6 mb-2">Seats: 5</p>
+                  <p class="col-6 mb-2">Mile Age: 40000</p>
+                  <p class="col-6 mb-2">Fuel: Diesel</p>
+                  <p class="col-6 mb-2">Transmission: Manual</p>
+                  <p class="col-6 mb-2">Available</p>
+                </div>
+                <div class="mb-3">
+                  <small class="d-block">Per Day</small>
+                  <h5 class="fw-bold">$700</h5>
+                </div>
+                <a
+                  href="carsList/carsListings.html"
+                  class="btn w-100 custom-btn fw-bold"
+                  >Rent Car</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm p-3">
+              <figure class="text-center p-1">
+                <img
+                  src="./imgs/Ford-Mustang-trans.png"
+                  class="card-img-top w-100"
+                  alt="Ford Mustang"
+                />
+              </figure>
+              <div class="card-body">
+                <h5 class="card-title mb-3 fw-bold">Ford Mustang</h5>
+                <div class="row text-muted mb-3">
+                  <p class="col-6 mb-2">Year: 2021</p>
+                  <p class="col-6 mb-2">Seats: 4</p>
+                  <p class="col-6 mb-2">Mile Age: 15000</p>
+                  <p class="col-6 mb-2">Fuel: Gasoline</p>
+                  <p class="col-6 mb-2">Transmission: Automatic</p>
+                  <p class="col-6 mb-2">Available</p>
+                </div>
+                <div class="mb-3">
+                  <small class="d-block">Per Day</small>
+                  <h5 class="fw-bold">$1800</h5>
+                </div>
+                <a
+                  href="carsList/carsListings.html"
+                  class="btn w-100 custom-btn fw-bold"
+                  >Rent Car</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm p-3">
+              <figure class="text-center p-1">
+                <img
+                  src="./imgs/Jeep-Wrangler-20.png"
+                  class="card-img-top w-100"
+                  alt="Jeep Wrangler"
+                />
+              </figure>
+              <div class="card-body">
+                <h5 class="card-title mb-3 fw-bold">Jeep Wrangler</h5>
+                <div class="row text-muted mb-3">
+                  <p class="col-6 mb-2">Year: 2022</p>
+                  <p class="col-6 mb-2">Seats: 5</p>
+                  <p class="col-6 mb-2">Mile Age: 9000</p>
+                  <p class="col-6 mb-2">Fuel: Gasoline</p>
+                  <p class="col-6 mb-2">Transmission: Automatic</p>
+                  <p class="col-6 mb-2">Available</p>
+                </div>
+                <div class="mb-3">
+                  <small class="d-block">Per Day</small>
+                  <h5 class="fw-bold">$1300</h5>
+                </div>
+                <a
+                  href="carsList/carsListings.html"
+                  class="btn w-100 custom-btn fw-bold"
+                  >Rent Car</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Offers -->
+    <section class="offers py-5" id="offers">
+      <div class="container">
+        <h2 class="text-center mb-5 fw-bold">Special Offers✨</h2>
+        <div class="row g-4">
+          <!-- Offer Card 1 -->
+          <div class="col-12 col-md-6">
+            <div class="card h-100 offer-card">
+              <div
+                class="card-body text-center d-flex flex-column justify-content-between"
+              >
+                <div>
+                  <h3 class="card-title fw-bold mb-2">
+                    Special Offer: Corporate Fleet
+                  </h3>
+                  <p class="text-muted mb-4">
+                    Premium vehicles for your business at 20% off!
+                  </p>
+                  <img
+                    src="./imgs/Mercedes-C-Class-Offer.png"
+                    class="mb-4"
+                    alt="Blue Sedan"
+                  />
+                </div>
+                <a
+                  href="carsList/carsListings.html"
+                  class="btn custom-btn fw-bold btn-outline-light rounded-pill px-4"
+                  >Discover the Fleet of Vehicles</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Offer Card 2 -->
+          <div class="col-12 col-md-6">
+            <div class="card h-100 offer-card">
+              <div
+                class="card-body text-center d-flex flex-column justify-content-between"
+              >
+                <div>
+                  <h3 class="card-title fw-bold mb-2">
+                    Special Offer: Corporate Fleet
+                  </h3>
+                  <p class="text-muted mb-4">
+                    Luxury SUVs for your team – save 15% today!
+                  </p>
+                  <img
+                    src="./imgs/Kia-Sportage-offer.png"
+                    class="img-fluid mb-4"
+                    alt="Grey SUV"
+                  />
+                </div>
+                <a
+                  href="carsList/carsListings.html"
+                  class="btn custom-btn fw-bold btn-outline-light rounded-pill px-4"
+                  >Discover the Fleet of Vehicles</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Categories -->
+    <section class="py-5 slider" style="height: 60vh" id="categories">
+      <div class="container h-100 d-flex align-items-center">
+        <div class="swiper mySwiper w-100">
+          <div class="swiper-wrapper align-items-center">
+            <!-- Brand 1 -->
+            <div
+              class="swiper-slide d-flex justify-content-center align-items-center"
+            >
+              <img
+                src="./imgs/brands/Toyota-Logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="Toyota"
+              />
+            </div>
+
+            <!-- Brand 2 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/Ford-logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="Ford"
+              />
+            </div>
+
+            <!-- Brand 3 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/Jeep-logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="Jeep"
+              />
+            </div>
+
+            <!-- Brand 4 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/Hyundai-Logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="Hyundai"
+              />
+            </div>
+
+            <!-- Brand 5 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/Chevrolet-logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="Chevrolet"
+              />
+            </div>
+
+            <!-- Brand 6 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/Nissan-logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="Nissan"
+              />
+            </div>
+
+            <!-- Brand 7 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/Kia-logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="Kia"
+              />
+            </div>
+
+            <!-- Brand 8 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/Renault-Logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="Renault"
+              />
+            </div>
+
+            <!-- Brand 9 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/BMW-Logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="BMW"
+              />
+            </div>
+
+            <!-- Brand 10 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/Mitsubishi-Logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="Mitsubishi"
+              />
+            </div>
+
+            <!-- Brand 11 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/Mercedes-Benz-Logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="Mercedes"
+              />
+            </div>
+
+            <!-- Brand 12 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/suzuki-logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="suzuki"
+              />
+            </div>
+
+            <!-- Brand 13 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/mazda-logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="mazda"
+              />
+            </div>
+
+            <!-- Brand 14 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/Honda-logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="Honda"
+              />
+            </div>
+
+            <!-- Brand 15 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/golf-logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="golf"
+              />
+            </div>
+
+            <!-- Brand 16 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/peugeot-logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="peugeot"
+              />
+            </div>
+
+            <!-- Brand 17 -->
+            <div class="swiper-slide d-flex justify-content-center">
+              <img
+                src="./imgs/brands/lexus-logo.png"
+                class="img-fluid"
+                style="height: 120px"
+                alt="lexus"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer"></footer>
+
+    <!-- Swiper CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <!-- Bootstrap CDN -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/homeScript.js"></script>
+    <script type="module" src="NavBar/navBar.js"></script>
+    <script src="Footer/Footer.js"></script>
+  </body>
+</html>
