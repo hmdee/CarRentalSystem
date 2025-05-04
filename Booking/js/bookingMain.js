@@ -50,44 +50,7 @@ price.textContent=`${selectedCar.price_per_day}$/Day`
 
 /******************************************************************************************************/
 
-/*********************************************************************************************/
-  // Disable booked dates with flatpickr
-  function disableBookedDates() {
-    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-    const bookedRanges = bookings
-      .filter(
-        (booking) =>
-          booking.carId === selectedCar.id &&
-          (!booking.status || booking.status === "pending" || booking.status === "confirmed")
-      )
-      .map((booking) => ({
-        from: booking.pickupDate,
-        to: booking.dropOffDate,
-      }));
 
-    flatpickr("#pickUpDate", {
-      dateFormat: "Y-m-d",
-      minDate: "today",
-      disable: bookedRanges,
-      onChange: () => {
-        DateValidation(pickUpDate.value, pickUpTime.value, DropOffDate.value, dropOffTime.value);
-        displayTotalPriceAndDuration();
-      },
-    });
-
-    flatpickr("#DropOffDate", {
-      dateFormat: "Y-m-d",
-      minDate: "today",
-      disable: bookedRanges,
-      onChange: () => {
-        DateValidation(pickUpDate.value, pickUpTime.value, DropOffDate.value, dropOffTime.value);
-        displayTotalPriceAndDuration();
-      },
-    });
-  }
-
-  // Run disableBookedDates
-  disableBookedDates();
 /*********************************************************************************************/ 
 pickUpDate.addEventListener('change',()=>{
  DateValidation(pickUpDate.value,pickUpTime.value,DropOffDate.value,dropOffTime.value)
@@ -121,7 +84,13 @@ let {totalDays,extraHours,totalPrice} = addBooking(pickUpDate.value, DropOffDate
 `;
 const bookingModal = new bootstrap.Modal(document.getElementById("bookingModal"));
   bookingModal.show();  
-  disableBookedDates();
+  bookBtn.disabled=true;
+  if(bookBtn.disabled===true)
+  {
+   
+    bookBtn.style.pointerEvents='none'
+    bookBtn.style.opacity='.7'
+  }
 }
   else
   {

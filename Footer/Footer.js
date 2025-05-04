@@ -7,10 +7,10 @@ footer.innerHTML=` <div class="container">
                     <h5 class="logo">Drivee.</h5>
                     <p class="para">Is Just A Drivee Ride Away-Take Control Of Your Journey Today</p>
                     <div class="social-icons">
-                        <a href="#"><i class="bi bi-facebook"></i></a>
-                        <a href="#"><i class="bi bi-twitter"></i></a>
-                        <a href="#"><i class="bi bi-instagram"></i></a>
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/"><i class="bi bi-twitter"></i></a>
+                        <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.linkedin.com/"><i class="bi bi-linkedin"></i></a>
                     </div>
                 </div>
                 

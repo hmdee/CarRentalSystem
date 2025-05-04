@@ -15,15 +15,14 @@ document.getElementById('adminLogout').addEventListener('click',()=>{
 }) 
 
 const init = async () => {
-    let bookings = getBookings(); // Sync
-    let cars = await getCars();   // Async
+    let bookings = getBookings(); 
+    let cars = await getCars();   
  
     if (!Array.isArray(cars)) {
         console.error(cars.error || "Failed to load cars");
         return;
     }
- 
-    // Helper: get car model by ID
+
     const getCarModelById = (carId) => {
         const car = cars.find(c => c.id.toString() === carId.toString());
         return car ? car.model : "Unknown";
@@ -61,14 +60,13 @@ const init = async () => {
  
     const attachStatusListeners = async () => {
         const selects = document.querySelectorAll(".status-select");
-        const cars = await getCars(); // ✅ خدت الداتا صح
+        const cars = await getCars();
     
         selects.forEach(select => {
             select.addEventListener("change", async (event) => {
                 const bookingId = Number(event.target.dataset.id);
                 const newStatus = event.target.value;
     
-                // تحديث حالة الحجز
                 const result = updateBookingStatus(bookingId, newStatus);
                 if (result.error) return alert(result.error);
     
@@ -81,12 +79,10 @@ const init = async () => {
                         const shouldBeAvailable = newStatus !== "Confirmed";
                         car.available = shouldBeAvailable;
     
-                        const updateResult = await updateCar(car.id, car); // ✅ لازم تستنى النتيجة
+                        const updateResult = await updateCar(car.id, car);
                         if (updateResult.error) return alert(updateResult.error);
                     }
                 }
-    
-                // إعادة عرض الجداول
                 renderAll();
             });
         });

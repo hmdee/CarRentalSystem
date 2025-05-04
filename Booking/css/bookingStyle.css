@@ -179,3 +179,7 @@ label i {
   color: var(--color-text-main);
   border: solid 1px var(--color-text-main);
 }
+
+/* .disabled-btn{
+  background-color: #2a2a2a;
+} */
