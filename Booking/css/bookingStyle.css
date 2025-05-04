@@ -5,7 +5,6 @@
   --font-body: 16px;
   --font-small: 14px;
 
-
   --bg-color: #fff;
   --main-bg-color: #f6f5f1;
   --input-bg: #fff;
@@ -24,8 +23,7 @@ body.dark-mode {
   --color-header-bg: #2a2a2a;
   --color-text-main: #ffffff;
 }
-.py-6
-{
+.py-6 {
   padding: 95px 0;
 }
 
@@ -57,7 +55,12 @@ body {
   position: relative;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--text-main);
 }
 
@@ -147,34 +150,30 @@ label i {
   color: var(--color-header-bg);
 }
 
-
-
 .modal-content {
   background-color: var(--main-bg-color);
   color: var(--text-main);
   border-radius: 10px;
   padding: 20px;
 }
-#gotohomeBtn
-{
+#gotohomeBtn {
   background: var(--btn-color);
   color: var(--input-bg);
   border: var(--btn-color);
 }
-.logInAlert{
+.logInAlert {
   background-color: var(--main-bg-color) !important;
 }
-.logInAlert p
-{
-  color: var( --text-main) !important;
+.logInAlert p {
+  color: var(--text-main) !important;
 }
-.logInAlert a
-{  transition: all 0.3s;
+.logInAlert a {
+  transition: all 0.3s;
   background: var(--btn-color);
   color: var(--input-bg);
   border: solid 1px var(--btn-color);
 }
-.logInAlert a:hover{
+.logInAlert a:hover {
   background-color: var(--color-header-bg);
   color: var(--color-text-main);
   border: solid 1px var(--color-text-main);

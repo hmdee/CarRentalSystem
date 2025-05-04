@@ -24,7 +24,7 @@ export default function signUp(userName, userEmail, userPass) {
   
     setTimeout(() => {
       window.open("../../Login/Login.html", "_self");
-    }, 3000);
+    }, 2000);
   }
 
 }

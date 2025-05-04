@@ -1,14 +1,18 @@
 const user = JSON.parse(localStorage.getItem("currentUser"));
 const selectedCar = JSON.parse(localStorage.getItem("selectedCar"));
 
-
 export default function addBooking(
   pickupDate,
   dropOffDate,
   pickUpTime,
   dropOffTime
 ) {
-  const { totalDays, extraHours, totalPrice } = calcTotalPrice(pickupDate, dropOffDate, pickUpTime, dropOffTime);
+  const { totalDays, extraHours, totalPrice } = calcTotalPrice(
+    pickupDate,
+    dropOffDate,
+    pickUpTime,
+    dropOffTime
+  );
   const booking = {
     id: Date.now(),
     userId: user.id,
@@ -24,10 +28,15 @@ export default function addBooking(
   const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
   bookings.push(booking);
   localStorage.setItem("bookings", JSON.stringify(bookings));
-return {totalPrice,totalDays,extraHours}
+  return { totalPrice, totalDays, extraHours };
 }
 
-export function calcTotalPrice(pickupDate, dropOffDate, pickUpTime, dropOffTime) {
+export function calcTotalPrice(
+  pickupDate,
+  dropOffDate,
+  pickUpTime,
+  dropOffTime
+) {
   const start = new Date(`${pickupDate} ${pickUpTime}`);
   const end = new Date(`${dropOffDate} ${dropOffTime}`);
   const diffMS = end - start;
@@ -37,7 +46,6 @@ export function calcTotalPrice(pickupDate, dropOffDate, pickUpTime, dropOffTime)
   const totalDaysPrice = totalDays * selectedCar.price_per_day;
   const pricePerHour = selectedCar.price_per_day / 24;
   const extraHoursPrice = pricePerHour * extraHours;
-  const totalPrice= totalDaysPrice + extraHoursPrice
-  return {totalPrice,totalDays,extraHours}; 
+  const totalPrice = totalDaysPrice + extraHoursPrice;
+  return { totalPrice, totalDays, extraHours };
 }
-

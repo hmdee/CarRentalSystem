@@ -1,6 +1,6 @@
-const footer=document.getElementById('footer')
+const footer = document.getElementById("footer");
 
-footer.innerHTML=` <div class="container">
+footer.innerHTML = ` <div class="container">
             <div class="row">
                 
                 <div class="col-12 col-sm-6 col-md-3">
@@ -47,4 +47,4 @@ footer.innerHTML=` <div class="container">
                     </ul>
                 </div>
             </div>
-        </div>`
+        </div>`;
