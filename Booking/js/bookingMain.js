@@ -15,7 +15,7 @@ const modalBody = document.getElementById("bookingModalBody");
 const user = JSON.parse(localStorage.getItem("currentUser"));
 const currentTheme = localStorage.getItem("theme");
 const toggleBtn = document.getElementById("themeToggle");
-const bookings = JSON.parse(localStorage.getItem("bookings"));
+const bookings = JSON.parse(localStorage.getItem("bookings"))||[];
 if (!user) {
   document.getElementById("bookingRow").innerHTML = `
   <div class="d-flex logInAlert flex-column align-items-center justify-content-center py-5 bg-light rounded shadow-sm">
